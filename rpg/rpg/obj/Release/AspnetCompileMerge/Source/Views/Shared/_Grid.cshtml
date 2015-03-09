@@ -1,0 +1,34 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+    @Styles.Render("~/bundles/gridcss")
+
+    @Scripts.Render("~/bundles/modaljquery") 
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('table tbody tr:odd').addClass('zebraUm');
+        $('table tbody tr:even').addClass('zebraDois');
+    });
+
+</script>
+<div>
+    <div id="boxGrid">
+        
+        <div id="conteudo">
+            
+            <div id="nav">
+                <div id="BotoesGrid" class="botoes">
+                    <a id="botaoNovo" class="botaoNovo" onclick="botaonovo()" href="#">Novo</a>
+                </div>
+            </div>
+            <div id="grid">                
+                    @RenderBody()                
+            </div>            
+            <div id="boxPaginacao">
+                @Html.Raw(ViewBag.paginacao)
+            </div>
+        </div>
+    </div>    
+</div>

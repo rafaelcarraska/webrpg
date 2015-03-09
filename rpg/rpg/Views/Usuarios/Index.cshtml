@@ -1,0 +1,109 @@
+﻿@model IList<rpg.Models.Usuario>
+@{
+    Layout = "~/Views/Shared/_Grid.cshtml";
+}
+
+<table id="tabelaGrid" cellpadding="0" cellspacing="0">
+    <thead>
+        <tr class="titulo">
+            <th></th>
+            <th id="col_fil_desc">Descrição</th>
+            <th></th>
+        </tr>
+        <tr class="titulo">
+            <th></th>
+            <th><input type="text" id="txtColuna2" /></th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var usuario in Model)
+        {
+            <tr class="linha">
+                <td></td>
+                <td>@usuario.Nome</td>
+                <td>
+                    <a href="#" onclick="clickmodal(@usuario.Cod_Usuario)">Editar</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<div class="modal" id="modal" style="width: 500px; height: 200px;">
+
+    <div class="fechar">
+        <a href="#" onclick="fecharmodal()">Fechar</a>
+    </div>
+    <div class="titulomodal" style=" margin-left:35%;">
+        <p id="titulomodal">Editar Usuário</p>
+    </div>
+    <form id="formmodal" method="post">
+        <div class="modalform" style="width: 400px; height: 100%; float:left;">
+            <div class="fordescricao linha">
+                <input type="hidden" name="cod_usuario" value="123" id="cod_usuario" />
+                <p id="desc_usuario" style="font-size: 16px; font-weight: bold; margin-bottom:10px;"></p>
+            </div>
+            <div class="formativo linha">
+                <label for="Empresa">Perfil</label>
+                <select id="cbperfil" name="cbperfil">
+                    @foreach (var perfil in ViewBag.perfil)
+                    {
+                        <option value="@perfil.Cod_Perfil">@perfil.Descricao</option>
+                    }
+                </select>
+            </div>
+        </div>
+        <div style="width: 80px; height: 100%;" class="divbtn">
+            <input class="btnsalvar" id="btnsalvar" type="submit" value="Salvar" onclick="salvar()" style="margin-top: 125px;" />
+        </div>
+    </form>
+</div>
+
+<div class="modaljs" id="modaljs">
+    <p class="textjs">Aguarde</p>
+</div>
+<script>
+
+    $(function () {
+        $("#tabelaGrid input").keyup(function () {
+            var index = $(this).parent().index();
+            var nth = "#tabelaGrid td:nth-child(" + (index + 1).toString() + ")";
+            var valor = $(this).val().toUpperCase();
+            $("#tabelaGrid tbody tr").show();
+            $(nth).each(function () {
+                if ($(this).text().toUpperCase().indexOf(valor) < 0) {
+                    $(this).parent().hide();
+                }
+            });
+        });
+        $("#tabelaGrid input").blur(function () {
+            $(this).val("");
+        });
+    });
+
+    function clickmodal(id) {        
+        if (id != 0) {
+            $('#titulomodal').html("Editar Usuário");
+        }
+        $('.modal').bPopup({
+            modalClose: false
+        });
+    }
+
+    function salvar() {
+        var cod_usuario = $('#cod_usuario').val();
+        var descricao = $('#desc_usuario').html();
+        var cod_perfil = $('#cbperfil').val();
+        var url = "@Url.Action("Adiciona", "Usuario")";
+        $.ajax({
+            url: url,
+            type: "POST",
+            data: { cod_usuario: cod_usuario, cod_perfil: cod_perfil, nome: descricao },
+            beforeSend: beforeSendFunction,
+            success: successFunction,
+            error: errorFunction,
+            complete: completeFunction
+        });
+    };
+
+</script>   

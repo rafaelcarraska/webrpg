@@ -13,7 +13,7 @@ namespace rpg.Dao
 {
     public class UsuarioDao
     {
-        public List<Usuario> Listar_Usuarios_dt()
+        public List<Usuario> Listar_Usuarios()
         {
             Conexao _conn = new Conexao();
             List<Usuario> list_usuarios = new List<Usuario>();
@@ -23,14 +23,20 @@ namespace rpg.Dao
             {
                 list_usuarios.Add(new Usuario
                 {
-                    Login = row["login"].ToString(),
+                    Cod_Usuario = Convert.ToInt32(row["cod_usuario"].ToString()),
                     Nome = row["nome"].ToString(),
-                    Cod_Usuario = Convert.ToInt32(row["cod_usuario"].ToString())
+                    Cod_Perfil = Convert.ToInt32(row["Cod_Perfil"].ToString()),
+                    Login = row["login"].ToString(),
+                    Email = row["Email"].ToString(),
+                    Ativo = Convert.ToBoolean(row["Ativo"].ToString())
+                    
                 });
             }
             
             return list_usuarios;
         }
+
+
 
         public Usuario Listar_Usuarios_dt(int cod_usuario)
         {

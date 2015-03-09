@@ -1,0 +1,67 @@
+﻿.modal { 
+    display:none;     
+    background-color:white;
+}
+.modaljs { 
+    display:none;     
+    background-color:white;
+    width:200px;
+    height:100px;
+}
+.fechar{
+    float:right;
+    padding-right:10px;
+    padding-top:10px;
+}
+.fechar a{
+    color:#2145BD;
+  font-weight:bold;
+}
+.modalform{
+    margin-left:20px;
+}
+.divbtn{
+    float:right;    
+}
+ul {
+    list-style-type:none;
+ }
+li {
+    list-style-type:none;
+ }
+.tree li{
+    margin-left:-15px;
+
+}
+.tree{
+    overflow-x: hidden;
+    overflow-y: scroll;
+}
+.titulomodal{
+    width: 200px;
+    height: 30px;
+    margin-top: 10px;
+    color: #de5d29;
+    float: left;
+    font-family: Arial;
+    font-size: 19px;
+}
+.selecione 
+{
+    float: left;
+    margin-top: 15px;
+    width: 100%;
+    font-weight: bold;
+}
+.modal .linha
+{
+    padding-top: 10px;
+}
+.textjs{
+    padding-left:68px;
+    padding-top:38px;
+    color: #de5d29;
+    float: left;
+    font-family: Arial;
+    font-size: 14px;
+}

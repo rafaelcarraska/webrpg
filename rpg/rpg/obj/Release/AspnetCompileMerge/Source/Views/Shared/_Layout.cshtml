@@ -1,0 +1,32 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>RPG</title>
+
+    @Styles.Render("~/bundles/Basecss")
+    
+    @Scripts.Render("~/bundles/Basejquery")   
+    
+
+</head>
+<body onload="horizontal('')">
+    <div class="topo">
+        <div class="logotipo">
+            <a href="/Home"><img src="~/Imagens/logotipo.jpg"></a>
+        </div>
+    
+        @Html.Action("Index", "Menu")   
+        
+    <div class="linha3">
+        <img src="~/Imagens/setaDupla.gif" class="topo_seta">
+        <h1 class="topo_subtitulo">@ViewBag.pagina</h1>
+    </div> 
+    <div class="divisa"></div>
+    </div>
+    <div class="conteudo">
+        @RenderBody()
+    </div>
+</body>
+</html>

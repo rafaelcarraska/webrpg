@@ -16,7 +16,7 @@ namespace rpg.Dao
         {
             if (_conn == null)
             {
-                _conn = new SqlConnection("Data Source=127.0.0.1;Initial Catalog=rpg_web;User ID=sa;Password=Managers2b;");
+                _conn = new SqlConnection("Data Source=SQL5014.Smarterasp.net;Initial Catalog=DB_9BC14A_systemrpg;User ID=DB_9BC14A_systemrpg_admin;Password=Managers2b;");
             }
         }
 

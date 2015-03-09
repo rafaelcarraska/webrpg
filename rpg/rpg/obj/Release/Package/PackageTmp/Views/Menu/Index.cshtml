@@ -1,0 +1,23 @@
+﻿@{
+    Layout = null;
+}
+<div class="linha1">
+    <div class="box_data_empresa">
+        <a href="/Home"><img src="~/Imagens/icones/house.gif" class="topo_house"></a>
+        <span class="topo_data">@ViewBag.data_hora</span>
+        <img onclick="dado(1, 20)" src="~/Imagens/icones/company.png" width="16" height="16" class="topo_company">
+        <span class="topo_empresa">Campanha</span>
+    </div>
+    <div class="box_logout">
+        <a href="/logout"><img src="~/Imagens/icones/cancel.gif" class="topo_cancel"></a>
+        <img src="~/Imagens/icones/key.gif" class="topo_key">
+        <img src="~/Imagens/icones/pencil.gif" class="topo_pencil">
+        <span class="topo_bemvindo">@ViewBag.bemvindo</span>
+</div>
+</div>
+
+<div class="linha2">
+    <div id="menu" class="divMenu">
+        @Html.Raw(ViewBag.menu)
+    </div>
+</div>

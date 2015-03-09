@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using rpg.Dao;
 using rpg.Models;
+using rpg.Dao;
 
 namespace rpg.Controllers
 {
@@ -26,12 +26,12 @@ namespace rpg.Controllers
             Usuario _usuario = _UsuarioDao.busca(login, senha);
             if (_usuario != null)
             {
-                Session["usuariologado"] = _usuario;
+                SessionView.UsuarioSession = _usuario;
                 ModuloDao _ModuloDao = new ModuloDao();
                 IList<Permisao> _permisoes = _ModuloDao.Listar_permisao(_usuario.Cod_Perfil);
-                Session["permisoes"] = _permisoes;
+                SessionView.PermisoesSession = _permisoes;
                 //Session["empresa"] = _UsuarioDao.Empresa(_usuario.Cod_Empresa_Pai);
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("Home", "Home");
             }
             else
             {

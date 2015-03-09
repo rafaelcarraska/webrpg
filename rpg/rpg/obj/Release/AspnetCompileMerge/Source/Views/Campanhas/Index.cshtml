@@ -1,0 +1,83 @@
+﻿@model IList<rpg.Models.Campanha>
+@{
+    Layout = "~/Views/Shared/_Grid.cshtml";
+}
+@Styles.Render("~/bundles/modalcss")
+
+<table id="tabelaGrid" cellpadding="0" cellspacing="0">
+    <thead>
+        <tr class="titulo">
+            <td></td>
+            <td>Descrição</td>
+            <td></td>
+            <td></td>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var Campanha in Model)
+        {
+            <tr class="linha">
+                <td></td>
+                <td>@Campanha.Descricao</td>
+                <td>
+                    <a href="#" onclick="clickmodal(@Campanha.Cod_Ficha)">Editar</a>
+                </td>
+                <td>
+                    <a href="#" onclick="deletar(@Campanha.Cod_Ficha, '@Campanha.Descricao', this)">Deletar</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<div class="modal" id="modal" style="width: 500px; height: 200px;">
+    <div class="fechar">
+        <a href="#" onclick="fecharmodal()">Fechar</a>
+    </div>
+    <div class="titulomodal" style=" margin-left:33%;">
+        <p id="titulomodal" style=" margin-left: 20px;">Editar </p>
+    </div>
+    <form method="post">
+        <div class="modalform" style="width: 400px; height: 100%; float:left; margin-top:10px;">
+            <div class="fordescricao linha">
+                <input type="hidden" name="Atributos.Cod_Atributo" value="0" id="cod_atributo" />
+                <label for="descricao">Descrição:</label>
+                <input id="descricao" name="Atributos.Descricao" required />
+            </div>
+            <div class="linha">
+                <input type="checkbox" value="ativo" id="ativo" name="Atributos.Ativo" /><span>Ativo</span>
+            </div>
+        </div>
+        <div style="width: 80px; height: 100%;" class="divbtn">
+            <input class="btnsalvar" id="btnsalvar" type="submit" value="Salvar" onclick="salvar()" style="margin-top: 125px;" />
+        </div>
+    </form>
+</div>
+
+<div class="modaljs" id="modaljs">
+    <p class="textjs">Aguarde</p>
+</div>
+<script>
+    function clickmodal(id) {
+        if (id != 0) {
+            $('#titulomodal').html("Editar Campanha");
+        }
+        $('.modal').bPopup({
+            modalClose: false
+        });
+    }
+
+    function botaonovo() {
+        $('#titulomodal').html("Nova Campanha");
+        clickmodal(0);
+    }
+
+    function deletar(id, descricao, botao) {
+        if (confirm("A Campanha " + descricao + " seá excluida do sistema ")) {
+            var par = $(botao).parent().parent()
+            par.remove();
+            $('table tbody tr:odd').removeClass("zebraUm zebraDois").addClass('zebraUm');
+            $('table tbody tr:even').removeClass("zebraUm zebraDois").addClass('zebraDois');
+        }
+    }
+
+</script>   

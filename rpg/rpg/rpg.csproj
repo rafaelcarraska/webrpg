@@ -160,21 +160,50 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AtributosController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Controllers\CampanhasController.cs" />
+    <Compile Include="Controllers\ClassesController.cs" />
+    <Compile Include="Controllers\FichasController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ItensController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Controllers\Magias_TecnicasController.cs" />
     <Compile Include="Controllers\MenuController.cs" />
-    <Compile Include="DAO\Conexao.cs" />
-    <Compile Include="DAO\ModulosDAO.cs" />
-    <Compile Include="DAO\AtributoDao.cs" />
-    <Compile Include="DAO\UsuarioDao.cs" />
+    <Compile Include="Controllers\PericiasController.cs" />
+    <Compile Include="Controllers\RacasController.cs" />
+    <Compile Include="Controllers\UsuariosController.cs" />
+    <Compile Include="Controllers\VantagensController.cs" />
+    <Compile Include="Dao\PerfilDao.cs" />
+    <Compile Include="Dao\ItemDao.cs" />
+    <Compile Include="Dao\Magia_TecnicaDao.cs" />
+    <Compile Include="Dao\VantagemDao.cs" />
+    <Compile Include="Dao\PericiaDao.cs" />
+    <Compile Include="Dao\ClasseDao.cs" />
+    <Compile Include="Dao\RacaDao.cs" />
+    <Compile Include="Dao\FichaDao.cs" />
+    <Compile Include="Dao\LogDao.cs" />
+    <Compile Include="Dao\CampanhaDao.cs" />
+    <Compile Include="Dao\Conexao.cs" />
+    <Compile Include="Dao\ModulosDao.cs" />
+    <Compile Include="Dao\AtributoDao.cs" />
+    <Compile Include="Dao\SessionView.cs" />
+    <Compile Include="Dao\UsuarioDao.cs" />
     <Compile Include="Filtros\AutorizacaofilterAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Perfil.cs" />
+    <Compile Include="Models\Magia_Tecnica.cs" />
+    <Compile Include="Models\Vantagem.cs" />
+    <Compile Include="Models\Item.cs" />
+    <Compile Include="Models\Pericia.cs" />
+    <Compile Include="Models\Classe.cs" />
+    <Compile Include="Models\Raca.cs" />
+    <Compile Include="Models\Ficha.cs" />
+    <Compile Include="Models\Campanha.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\Modulo.cs" />
     <Compile Include="Models\Atributos.cs" />
-    <Compile Include="Models\permisao.cs" />
+    <Compile Include="Models\Permisao.cs" />
     <Compile Include="Models\Usuario.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
@@ -183,25 +212,44 @@
     <Content Include="Content\Basico.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\Form.css" />
     <Content Include="Content\Grid.css" />
+    <Content Include="Content\jquery_ui.min.css" />
+    <Content Include="Content\jquery_ui.theme.min.css" />
     <Content Include="Content\Login.css" />
+    <Content Include="Content\Mestre.css" />
+    <Content Include="Content\Personagem.css" />
     <Content Include="Content\Modal.css" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Imagens\icones\cancel.gif" />
     <Content Include="Imagens\icones\company.png" />
     <Content Include="Imagens\icones\house.gif" />
+    <Content Include="Imagens\icones\images\ui-bg_flat_0_aaaaaa_40x100.png" />
+    <Content Include="Imagens\icones\images\ui-bg_flat_75_ffffff_40x100.png" />
+    <Content Include="Imagens\icones\images\ui-bg_glass_55_fbf9ee_1x400.png" />
+    <Content Include="Imagens\icones\images\ui-bg_glass_65_ffffff_1x400.png" />
+    <Content Include="Imagens\icones\images\ui-bg_glass_75_dadada_1x400.png" />
+    <Content Include="Imagens\icones\images\ui-bg_glass_75_e6e6e6_1x400.png" />
+    <Content Include="Imagens\icones\images\ui-bg_glass_95_fef1ec_1x400.png" />
+    <Content Include="Imagens\icones\images\ui-bg_highlight-soft_75_cccccc_1x100.png" />
+    <Content Include="Imagens\icones\images\ui-icons_222222_256x240.png" />
+    <Content Include="Imagens\icones\images\ui-icons_2e83ff_256x240.png" />
+    <Content Include="Imagens\icones\images\ui-icons_454545_256x240.png" />
+    <Content Include="Imagens\icones\images\ui-icons_888888_256x240.png" />
+    <Content Include="Imagens\icones\images\ui-icons_cd0a0a_256x240.png" />
     <Content Include="Imagens\icones\key.gif" />
     <Content Include="Imagens\icones\pencil.gif" />
     <Content Include="Imagens\linha.gif" />
     <Content Include="Imagens\logotipo.jpg" />
+    <Content Include="Imagens\Personagens\pers_1.jpg" />
     <Content Include="Imagens\setaDupla.gif" />
     <Content Include="Scripts\bmodal.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\jquery-1.5.1.min.js" />
     <Content Include="Scripts\jquery-2.1.3.min.js" />
-    <Content Include="Scripts\jquery-ui-1.8.11.min.js" />
+    <Content Include="Scripts\jquery-ui - 1.11.3.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\modernizr-1.7.min.js" />
     <Content Include="Scripts\Uteis.js" />
@@ -239,6 +287,55 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Atributos\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Campanhas\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Classes\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Fichas\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Itens\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Magias_Tecnicas\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Pericias\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Racas\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Vantagens\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Usuarios\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Racas\Form.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Classes\Form.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Home\Personagem.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Home\Mestre.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Home\Home.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Home\Editar_Personagem.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\PublishProfiles\RPG.pubxml" />
+    <Content Include="Views\Vantagens\Form.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

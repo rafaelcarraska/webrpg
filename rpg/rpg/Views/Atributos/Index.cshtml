@@ -2,15 +2,20 @@
 @{
     Layout = "~/Views/Shared/_Grid.cshtml";
 }
-@Styles.Render("~/bundles/modalcss")
 
 <table id="tabelaGrid" cellpadding="0" cellspacing="0">
     <thead>
         <tr class="titulo">
-            <td></td>
-            <td>Descrição</td>
-            <td></td>
-            <td></td>
+            <th></th>
+            <th id="col_fil_desc">Descrição</th>
+            <th></th>
+            <th></th>
+        </tr>
+        <tr class="titulo">
+            <th></th>
+            <th><input type="text" id="txtColuna2" /></th>
+            <th></th>
+            <th></th>
         </tr>
     </thead>
     <tbody>
@@ -20,7 +25,7 @@
                 <td></td>
                 <td>@Atributos.Descricao</td>
                 <td>
-                    <a href="#" onclick="clickmodal(@Atributos.Cod_Atributo, '@Atributos.Descricao')">Editar</a>
+                    <a href="#" onclick="clickmodal(@Atributos.Cod_Atributo, '@Atributos.Descricao', '@Atributos.Ativo')">Editar</a>
                 </td>
                 <td>
                     <a href="#" onclick="deletar(@Atributos.Cod_Atributo, '@Atributos.Descricao', this)">Deletar</a>
@@ -30,21 +35,22 @@
     </tbody>
 </table>
 <div class="modal" id="modal" style="width: 500px; height: 200px;">
-
     <div class="fechar">
         <a href="#" onclick="fecharmodal()">Fechar</a>
     </div>
-    <div class="titulomodal">
-        <p id="titulomodal" style=" margin-left: 170px;">Editar Atributos</p>
+    <div class="titulomodal" style=" margin-left:33%;">
+        <p id="titulomodal" style=" margin-left: 20px;">Editar</p>
     </div>
     <form method="post">
-        <div class="modalform" style="width: 400px; height: 100%; float:left;">
-            <div class="fordescricao">
-                <input type="hidden" name="cod_atributo" value="123" id="cod_perfil" />
+        <div class="modalform" style="width: 400px; height: 100%; float:left; margin-top:10px;">
+            <div class="fordescricao linha">
+                <input type="hidden" name="Atributos.Cod_Atributo" value="0" id="cod_atributo" />
                 <label for="descricao">Descrição:</label>
-                <input id="descricao" name="Atributos.descricao" required />
+                <input id="descricao" name="Atributos.Descricao" required />
             </div>
-            
+            <div class="linha">
+                <input type="checkbox" value="ativo" id="ativo" name="Atributos.Ativo"/><span>Ativo</span>
+            </div>            
         </div>
         <div style="width: 80px; height: 100%;" class="divbtn">
             <input class="btnsalvar" id="btnsalvar" type="submit" value="Salvar" onclick="salvar()" style="margin-top: 125px;" />
@@ -52,37 +58,82 @@
     </form>
 </div>
 
+<div class="modaljs" id="modaljs">
+    <p class="textjs">Aguarde</p>
+</div>
 <script>
-    function clickmodal(id, descricao) {
-        
+    $(function () {
+        $("#tabelaGrid input").keyup(function () {
+            var index = $(this).parent().index();
+            var nth = "#tabelaGrid td:nth-child(" + (index + 1).toString() + ")";
+            var valor = $(this).val().toUpperCase();
+            $("#tabelaGrid tbody tr").show();
+            $(nth).each(function () {
+                if ($(this).text().toUpperCase().indexOf(valor) < 0) {
+                    $(this).parent().hide();
+                }
+            });
+        });
+        $("#tabelaGrid input").blur(function () {
+            $(this).val("");
+        });
+    });
+
+    function clickmodal(id, descricao, ativo) {        
         $('#cod_atributo').val(id);
         $('#descricao').val(descricao);
+        $('#ativo').prop('checked', ativo)
+        if (id != 0) {
+            $('#titulomodal').html("Editar Atributo");
+        }
         $('.modal').bPopup({
             modalClose: false
         });
-
-    }
-
-    function fecharmodal() {
-        var bPopup = $('.modal').bPopup();
-        bPopup.close();
     }
 
     function botaonovo() {
-        clickmodal(0, "");
+        clickmodal(0, "", true);
     }
 
     function salvar() {
-        
+        var cod_atributo = $('#cod_atributo').val();
+        var descricao = $('#descricao').val();
+        var ativo = $('#ativo').prop('checked');
+
+        var url = "@Url.Action("Adiciona", "Atributos")";
+        $.ajax({
+            url: url,
+            type: "POST",
+            data: { cod_atributo: cod_atributo, descricao: descricao, ativo: ativo },
+            beforeSend: beforeSendFunction,
+            success: successFunction,
+            error: errorFunction,
+            complete: completeFunction
+        });
     }
 
-   function deletar(id, descricao, botao){
-       if (confirm("O Atributo " + descricao +" seá excluido do sistema ")) {
+    function deletar(cod_atributo, descricao, botao) {
+       if (confirm("O Atributo " + descricao +" será excluido do sistema ")) {
            var par = $(botao).parent().parent()
            par.remove();
            $('table tbody tr:odd').removeClass("zebraUm zebraDois").addClass('zebraUm');
            $('table tbody tr:even').removeClass("zebraUm zebraDois").addClass('zebraDois');
+
+           var url = "@Url.Action("delete", "Atributos")";
+           $.ajax({
+               url: url,
+               type: "POST",
+               data: { cod_atributo: cod_atributo },
+               beforeSend: beforeSendFunction,
+               success: successFunction,
+               error: errorFunction,
+               complete: completeFunction
+           });
        }
-    }
+   }
+
+    $("#descricao").keyup(function () {
+        limite(this, 150);
+    });
 
 </script>   

@@ -17,5 +17,13 @@ namespace rpg.Controllers
             ViewBag.menu = montaMenu();
             return View();
         }
+
+        [Route("logout", Name = "logout")]
+        public ActionResult logout()
+        {
+            Session.Clear();
+            Session.Abandon();
+            return RedirectToAction("Index", "Login");            
+        }
     }
 }

@@ -1,0 +1,32 @@
+﻿@model rpg.Models.Raca
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@Styles.Render("~/bundles/formcss")
+
+<div>
+    <div id="boxForm">
+        <div id="conteudo">
+            <form method="post">
+                
+                <div class="fordescricao linha">
+                    <input type="hidden" name="Raca.Cod_Raca" value="@Model.Cod_Raca" id="Cod_Raca" />
+                    <label for="descricao">Descrição:</label>
+                    <input id="descricao" name="Raca.Descricao" value="@Model.Descricao" required />
+                </div>
+                <div class="linha">
+                    <label for="descricaodetalhada">Descrição Detalhada:</label>
+                    <textarea cols="40" rows="5" id="Descricao_Detalhada" name="Raca.Descricao_Detalhada">@Model.Descricao_Detalhada</textarea>
+                </div>
+                <div class="linha">
+                    <input type="checkbox" value="ativo" id="ativo" name="Raca.Ativo" /><span>Ativo</span>
+                </div>
+                
+                <div style="width: 80px; height: 100%;" class="divbtn">
+                    <input class="btnsalvar" id="btnsalvar" type="submit" value="Salvar" onclick="salvar()" style="margin-top: 125px;" />
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

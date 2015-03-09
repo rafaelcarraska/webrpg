@@ -16,7 +16,7 @@ namespace rpg.Controllers
        
         public bool verifica_acesso(string tela, string acao)
         {
-            IList<Permisao> _permisoes = (IList<Permisao>)Session["permisoes"];
+            IList<Permisao> _permisoes = SessionView.PermisoesSession;
             List<Permisao> filtro = _permisoes.Where(y => y.descricao == tela && y.permisao == acao).ToList();
             if (filtro.Count > 0)
             {
@@ -33,7 +33,7 @@ namespace rpg.Controllers
         public string bemvindo()
         {
             Usuario _usuario = new Usuario();
-            _usuario = (Usuario)Session["usuariologado"];
+            _usuario = (Usuario)SessionView.UsuarioSession;
 
             return "Olá, " + _usuario.Nome;
         }
@@ -41,7 +41,7 @@ namespace rpg.Controllers
         public string montaMenu()
         {
             Usuario _usuario = new Usuario();
-            _usuario = (Usuario)Session["usuariologado"];
+            _usuario = (Usuario)SessionView.UsuarioSession;
             ModuloDao _ModuloDao = new ModuloDao();
             IList<Modulo> modulos = _ModuloDao.Listar_modulo_acesso(_usuario.Cod_Usuario);
             List<Modulo> filtro = modulos.Where(y => y.cod_modulo_pai == 0).ToList();

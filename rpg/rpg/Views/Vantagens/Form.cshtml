@@ -1,0 +1,223 @@
+﻿@model rpg.Models.Vantagem
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@Scripts.Render("~/bundles/UIjquery")
+@Styles.Render("~/bundles/UI_css")
+
+@Styles.Render("~/bundles/formcss")
+@Styles.Render("~/bundles/gridcss")
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('table tbody tr:odd').addClass('zebraUm');
+        $('table tbody tr:even').addClass('zebraDois');
+    });
+
+</script>
+
+<div>
+    <div id="boxForm">
+        <div id="conteudo">
+            <form method="post">
+                <div class="fordescricao linha">
+                    <input type="hidden" name="Vantagem.Cod_Vantagem" value="@Model.Cod_Vantagem" id="Cod_Vantagem" />
+                    <label for="descricao">Descrição:</label>
+                    <input id="descricao" name="Vantagem.Descricao" value="@Model.Descricao" required style="width:250px;"/>
+                </div>                
+                <div class="linha">
+                    <label for="Custo">Custo:</label>
+                    <input id="Custo" class="numero"  name="Vantagem.Custo" value="@Model.Custo" required />
+                </div>
+                <div class="linha">
+                    <label for="Atributo">Atributo Bonus</label>
+                    <select id="cbAtributobonus" name="cbAtributobonus">
+                        @foreach (var Atributos in ViewBag.Atributos)
+                        {
+                            <option value="@Atributos.Cod_Atributo">@Atributos.Descricao</option>
+                        }
+                    </select>
+                    <label for="vlrbonus">Valor do bonus:</label>
+                    <input id="vlrbonus" class="numero" name="Vantagem.vlrbonus" value="" />
+                    <input type="button" id="btnaddatributo" class="btnadd" value="Adicionar" onclick="addatributo()" />
+                </div>
+                <div class="linha">
+                    <div id="boxGrid" class="grid_bonusatributo" style=" clear:both !important; margin-top: 8px; margin-left:0px; width:290px;">
+                        <div id="nav">
+                            <div id="BotoesGrid" class="botoes">
+                            </div>
+                        </div>
+                        <div id="grid">
+                            <table id="tabelaGrid" cellpadding="0" cellspacing="0">
+                                <thead>
+                                    <tr class="titulo">
+                                        <th></th>
+                                        <th>Atributos</th>
+                                        <th>Bonus</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+                        </div>
+                        <div id="boxPaginacao">
+                        </div>
+                    </div>
+                </div>
+                <div class="linha">
+                    <div class="add_vantagens">
+                        <label for="prevantagem">Pré Requisito Vantagem </label>
+                        <select id="cbprevantagem" name="cbprevantagem">
+                            @foreach (var Vantagens in ViewBag.Vantagens)
+                            {
+                                <option value="@Vantagens.Cod_Vantagem">@Vantagens.Descricao</option>
+                            }
+                        </select>
+                        <input type="button" id="btnaddVantagens" onclick="addVantagens()" value="Adicionar" />
+                    </div>
+                    
+                    <div id="tree" class="tree_vantagens" style="width: 400px; height: 100px; float:left; margin-left:35px; margin-bottom:1px;">
+                        <ul id="ulvantagens">                            
+                        </ul>                        
+                    </div>
+                </div>
+                <div class="linha">
+                    <label for="preatributo">Pré Requisito</label>
+                    <select id="cbpreatributo" name="cbpreatributo">
+                        @foreach (var Atributos in ViewBag.Atributos)
+                        {
+                            <option value="@Atributos.Cod_Atributo">@Atributos.Descricao</option>
+                        }
+                    </select>
+                    <label for="prevlr">Valor:</label>
+                    <input id="prevlr" class="numero" name="Vantagem.prevlr" value="@Model.Custo"  />
+                </div>
+                <div class="linha">
+                    <label for="Caracteristicas">Caracteristicas Detalhada:</label>
+                    <textarea cols="106" rows="6" id="Caracteristicas" name="Vantagem.Caracteristicas" style="display:inline-block; vertical-align:middle;">@Model.Caracteristicas</textarea>
+                </div>
+                <div class="linha">
+                    <label for="Campanha">Campanha</label>
+                    <select id="cbCampanha" name="cbCampanha">
+                        <option value="0">Global</option>
+                        @foreach (var Campanhas in ViewBag.Campanhas)
+                        {
+                            <option value="@Campanhas.Cod_Campanha">@Campanhas.Descricao</option>
+                        }
+                    </select>
+                </div>
+                <div class="linha">
+                    <input type="checkbox" checked="@Convert.ToBoolean(Model.Ativo) Model.Ativo" id="ativo" name="Vantagem.Ativo" /><span>Ativo</span>
+                </div>
+                
+                <div style="width: 80px; height: 100%;" class="divbtn">
+                    <input class="btnsalvar" id="btnsalvar" type="submit" value="Salvar" onclick="salvar()" style="margin-bottom: 25px;" />
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<script>
+    function addatributo() {
+        var existe = 0;
+        $('#tabelaGrid .tdatributos').each(function () {
+            if ($(this).html() == $("#cbAtributobonus option:selected").text()) {
+                existe = 1;
+                return false;
+            }
+        });
+        if (existe == 0) {
+            if (isNumber($("#vlrbonus").val())) {
+                $('#tabelaGrid').append('<tr class="linha_grid"><td><input class="codatributo" type="hidden" value="' + $("#cbAtributobonus option:selected").val() + '" /></td><td class="descatributo">' + $("#cbAtributobonus option:selected").text() + '</td><td class="vlrbonus">' + $("#vlrbonus").val() + '</td><td><a href="javascript:deletar(' + $("#cbAtributobonus option:selected").val() + ', \'' + $("#cbAtributobonus option:selected").text() + '\')">Deletar</a></td></tr>');
+                $("#cbAtributobonus option:selected").remove();
+            }
+            else {
+                alert("valor do bonus apenas numerico");
+            }
+        }
+        else {
+            alert("O Atributo " + $("#cbAtributobonus option:selected").text() + " já existe");
+        }
+    }
+
+
+
+    function addVantagens() {
+        var existe = 0;
+        $('#ulvantagens li .codvantagem').each(function () {
+            if ($(this).val() == $("#cbprevantagem option:selected").val()) {
+                existe = 1;
+                return false;
+            }
+        });
+        if (existe == 0) {
+            $('#ulvantagens').append('<li class="linha_li"><input class="codvantagem" type="hidden" value="' + $("#cbprevantagem option:selected").val() + '" /> ' + $("#cbprevantagem option:selected").text() + '  <a href="javascript:deletarli(' + $("#cbprevantagem option:selected").val() + ', \'' + $("#cbprevantagem option:selected").text() + '\')">Remover</a></li>');
+            $("#cbprevantagem option:selected").remove();
+        }
+        else {
+            alert("A Vantagem " + $("#cbprevantagem option:selected").text() + " já existe");
+        }
+    }
+
+    function deletar(cod, descricao) {
+        if (confirm("O Atributo " + descricao +" será excluido do sistema ")) {
+
+            $('#tabelaGrid .codatributo').each(function () {
+                if ($(this).val() == cod) {
+                    $(this).parent().parent().remove();
+                    $("#cbAtributobonus").append($('<option></option>').val(cod).html(descricao));
+                    return false;
+                }
+            });
+        }
+    }
+
+    function deletarli(cod, descricao) {
+        if (confirm("A Vantagem " + descricao + " será excluido do sistema ")) {
+
+            $('#ulvantagens li .codvantagem').each(function () {
+                if ($(this).val() == cod) {
+                    $(this).parent().remove();
+                    $("#cbprevantagem").append($('<option></option>').val(cod).html(descricao));
+                    return false;
+                }
+            });
+        }
+    }
+
+    function salvar() {
+        var cod_vantagem = $('#Cod_Vantagem').val();
+        var descricao = $('#descricao').val();
+        var custo = $('#Custo').val();
+
+        var atributos = '';
+        $('#tabelaGrid .linha_grid').each(function () {
+            atributos = atributos + $(this).find('.codatributo').val() + "_" + $(this).find('.vlrbonus').html() + ";";
+        });
+
+        var prerequisitovant = '';
+        $('#ulvantagens li .codvantagem').each(function () {
+            prerequisitovant = prerequisitovant + $(this).val() + "_";
+        });
+
+        var prerequisito = $('#cbpreatributo').val() + '_' + $('#prevlr').val();
+        var caracteristicas = $('#Caracteristicas').val();
+        var campanha = $('#cbCampanha').val();
+        var ativo = $('#ativo').prop('checked');
+
+        var url = "@Url.Action("Adiciona", "Vantagens")";
+        $.ajax({
+            url: url,
+            type: "POST",
+            data: { cod_vantagem: cod_vantagem, descricao: descricao, custo: custo, atributos: atributos, prerequisitovant: prerequisitovant, prerequisito: prerequisito, caracteristicas: caracteristicas, campanha: campanha, ativo: ativo },
+            beforeSend: beforeSendFunction,
+            success: successFunction,
+            error: errorFunction,
+            complete: completeFunction
+        });
+    }
+
+    $("#descricao").keyup(function () {
+        limite(this, 200);
+    });
+</script>

@@ -1,0 +1,42 @@
+﻿@model rpg.Models.Raca
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@Styles.Render("~/bundles/formcss")
+
+<div>
+    <div id="boxForm">
+        <div id="conteudo">
+            <div class="linha">
+                <label for="Mestre">Mestar a Campanha</label>
+                <select id="cbcampanhamestre" name="cbcampanhamestre">
+                    @foreach (var mestre in ViewBag.cbmestre)
+                    {
+                        <option value="@mestre.Cod_Campanha">@mestre.Descricao</option>
+                    }
+                </select>
+
+                <input class="btnMestrar" id="btnMestrar" type="submit" onclick="btnmestar()" value="Mestrar" />
+            </div>
+            <div class="linha">
+                <label for="Ficha">Minha Ficha da Campanha</label>
+                <select id="cbcampanhajogador" name="cbcampanhajogador">
+                    @foreach (var jogador in ViewBag.cbjogador)
+                    {
+                        <option value="@jogador.Cod_Campanha">@jogador.Descricao</option>
+                    }
+                </select>
+                <input class="btnJogar" id="btnJogar" type="submit" onclick="btnficha()" value="Jogar" />
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    function btnmestar() {
+        window.location.href = 'Mestre/' + $("#cbcampanhamestre").val();
+    }
+
+    function btnficha() {
+        window.location.href = 'Editar_Personagem/' + $("#cbcampanhajogador").val();
+    }
+</script>

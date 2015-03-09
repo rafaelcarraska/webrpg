@@ -1,19 +1,43 @@
 ﻿@{
     Layout = null;
 }
+@Scripts.Render("~/bundles/modaljquery")
+@Styles.Render("~/bundles/modalcss")
+
 <div class="linha1">
     <div class="box_data_empresa">
         <a href="/Home"><img src="~/Imagens/icones/house.gif" class="topo_house"></a>
         <span class="topo_data">@ViewBag.data_hora</span>
-        <img src="~/Imagens/icones/company.png" width="16" height="16" class="topo_company">
+        <img onclick="dado(1, 20)" src="~/Imagens/icones/company.png" width="16" height="16" class="topo_company">
         <span class="topo_empresa">Campanha</span>
     </div>
     <div class="box_logout">
-        <img src="~/Imagens/icones/cancel.gif" class="topo_cancel">
-        <img src="~/Imagens/icones/key.gif" class="topo_key">
+        <a href="/logout"><img src="~/Imagens/icones/cancel.gif" title="Logoff" class="topo_cancel"></a>
+        <img src="~/Imagens/icones/key.gif" class="topo_key" onclick="clickmodalsenha()" title="Alterar Senha">
         <img src="~/Imagens/icones/pencil.gif" class="topo_pencil">
         <span class="topo_bemvindo">@ViewBag.bemvindo</span>
+</div>
+</div>
+
+<div class="modalsenha" id="modalsenha" style="width: 390px; height: 150px;">
+    <div class="fechar">
+        <a href="#" onclick="fecharmodalsenha()">Fechar</a>
     </div>
+    <form id="formmodal" method="post">
+        <div class="modalform" style="width: 700px; height: 100%; float:left;">
+            <div class="linha">
+                <label for="senhanew">Nova Senha:</label>
+                <input id="senhanew" name="senhanew" value="" type="password" />
+            </div>
+            <div class="linha">
+                <label for="senhaconf">Confirmar:</label>
+                <input id="senhaconf" name="senhaconf" value="" type="password" />
+            </div>
+        </div>
+        <div style="width: 80px; height: 100%;" class="divbtn">
+            <input class="btnsalvar" id="btnsalvar" type="button" value="Salvar" onclick="btnsalvar()" "margin-top: 425px;" />
+        </div>
+    </form>
 </div>
 
 <div class="linha2">
@@ -22,3 +46,11 @@
     </div>
 </div>
 
+<script>
+    function clickmodalsenha() {
+        $('.modalsenha').bPopup({
+            modalClose: false,
+        });
+    }
+
+</script>
