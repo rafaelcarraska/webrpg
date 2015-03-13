@@ -120,8 +120,8 @@
 <script>
     function addatributo() {
         var existe = 0;
-        $('#tabelaGrid .tdatributos').each(function () {
-            if ($(this).html() == $("#cbAtributobonus option:selected").text()) {
+        $('#tabelaGrid .codatributo').each(function () {
+            if ($(this).val() == $("#cbAtributobonus option:selected").val()) {
                 existe = 1;
                 return false;
             }
@@ -129,7 +129,7 @@
         if (existe == 0) {
             if (isNumber($("#vlrbonus").val())) {
                 $('#tabelaGrid').append('<tr class="linha_grid"><td><input class="codatributo" type="hidden" value="' + $("#cbAtributobonus option:selected").val() + '" /></td><td class="descatributo">' + $("#cbAtributobonus option:selected").text() + '</td><td class="vlrbonus">' + $("#vlrbonus").val() + '</td><td><a href="javascript:deletar(' + $("#cbAtributobonus option:selected").val() + ', \'' + $("#cbAtributobonus option:selected").text() + '\')">Deletar</a></td></tr>');
-                $("#cbAtributobonus option:selected").remove();
+                //$("#cbAtributobonus option:selected").remove();
             }
             else {
                 alert("valor do bonus apenas numerico");
@@ -139,8 +139,6 @@
             alert("O Atributo " + $("#cbAtributobonus option:selected").text() + " já existe");
         }
     }
-
-
 
     function addVantagens() {
         var existe = 0;
@@ -152,7 +150,7 @@
         });
         if (existe == 0) {
             $('#ulvantagens').append('<li class="linha_li"><input class="codvantagem" type="hidden" value="' + $("#cbprevantagem option:selected").val() + '" /> ' + $("#cbprevantagem option:selected").text() + '  <a href="javascript:deletarli(' + $("#cbprevantagem option:selected").val() + ', \'' + $("#cbprevantagem option:selected").text() + '\')">Remover</a></li>');
-            $("#cbprevantagem option:selected").remove();
+            //$("#cbprevantagem option:selected").remove();
         }
         else {
             alert("A Vantagem " + $("#cbprevantagem option:selected").text() + " já existe");
@@ -165,7 +163,7 @@
             $('#tabelaGrid .codatributo').each(function () {
                 if ($(this).val() == cod) {
                     $(this).parent().parent().remove();
-                    $("#cbAtributobonus").append($('<option></option>').val(cod).html(descricao));
+                    //$("#cbAtributobonus").append($('<option></option>').val(cod).html(descricao));
                     return false;
                 }
             });
@@ -178,7 +176,7 @@
             $('#ulvantagens li .codvantagem').each(function () {
                 if ($(this).val() == cod) {
                     $(this).parent().remove();
-                    $("#cbprevantagem").append($('<option></option>').val(cod).html(descricao));
+                    //$("#cbprevantagem").append($('<option></option>').val(cod).html(descricao));
                     return false;
                 }
             });

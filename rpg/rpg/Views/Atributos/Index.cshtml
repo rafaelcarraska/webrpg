@@ -25,10 +25,10 @@
                 <td></td>
                 <td>@Atributos.Descricao</td>
                 <td>
-                    <a href="#" onclick="clickmodal(@Atributos.Cod_Atributo, '@Atributos.Descricao', '@Atributos.Ativo')">Editar</a>
+                    <a href="javascript: clickmodal(@Atributos.Cod_Atributo, '@Atributos.Descricao', '@Atributos.Ativo')">Editar</a>
                 </td>
                 <td>
-                    <a href="#" onclick="deletar(@Atributos.Cod_Atributo, '@Atributos.Descricao', this)">Deletar</a>
+                    <a href="javascript: deletar(@Atributos.Cod_Atributo, '@Atributos.Descricao', this)">Deletar</a>
                 </td>
             </tr>
         }
@@ -36,7 +36,7 @@
 </table>
 <div class="modal" id="modal" style="width: 500px; height: 200px;">
     <div class="fechar">
-        <a href="#" onclick="fecharmodal()">Fechar</a>
+        <a href="javascript: fecharmodal()">Fechar</a>
     </div>
     <div class="titulomodal" style=" margin-left:33%;">
         <p id="titulomodal" style=" margin-left: 20px;">Editar</p>

@@ -74,5 +74,92 @@ namespace rpg.Dao
 
             return _Vantagem;
         }
+
+        public string Insert(Vantagem vantagem)
+        {
+            string msg = "";
+            try
+            {
+                _conn = new Conexao();
+                _LogDao = new LogDao();
+
+                string strInsert = "insert into vantagens (Descricao, Custo, Bonus_Atributo, Pre_Vantagens, Pre_Requisitos, Caracteristicas, Campanha, Ativo) "
+                    +" values('" + vantagem.Descricao.Replace("'", "''") + "', " + vantagem.Custo + ", '" + string.Join<string>(";", vantagem.Bonus_Atributo).Replace("'", "''") + "', '"
+                    + string.Join<int>("_", vantagem.Pre_Vantagens).Replace("'", "''") + "', '" + vantagem.Pre_Requisitos.Replace("'", "''") + "', '" + vantagem.Caracteristicas.Replace("'", "''") + "', " 
+                    + vantagem.Campanha + ", '" + vantagem.Ativo.ToString() + "')";
+                _conn.execute(strInsert);
+                _LogDao.insert("Vantagem", "add", "");
+                //msg = "Vantagem '" + vantagem.Descricao + "', Criada.";
+            }
+            catch (Exception)
+            {
+                msg = "Erro ao adicionar a Vantagem ('" + vantagem.Descricao + "')";
+            }
+            return msg;
+        }
+
+        public string update(Vantagem vantagem)
+        {
+            string msg = "";
+            try
+            {
+                _conn = new Conexao();
+                _LogDao = new LogDao();
+
+                string strupdate = "update vantagens set Descricao = '" + vantagem.Descricao.Replace("'", "''") + "', Custo = " + vantagem.Custo 
+                    + ", Bonus_Atributo = '" + string.Join<string>(";", vantagem.Bonus_Atributo).Replace("'", "''") + "', Pre_Vantagens = '"+ string.Join<int>("_", vantagem.Pre_Vantagens).Replace("'", "''") 
+                    + "', Pre_Requisitos = '" + vantagem.Pre_Requisitos.Replace("'", "''") + "', Caracteristicas = '" + vantagem.Caracteristicas.Replace("'", "''") + "', Campanha = "+ vantagem.Campanha + ", Ativo = '" + vantagem.Ativo.ToString() + "') ";
+                _conn.execute(strupdate);
+                _LogDao.insert("Vantagem", "up", "cod_vantagem = "+vantagem.Cod_Vantagem.ToString());
+                //msg = "Vantagem '" + vantagem.Descricao + "', Criada.";
+            }
+            catch (Exception)
+            {
+                msg = "Erro ao atualizar a Vantagem ('" + vantagem.Descricao + "')";
+            }
+            return msg;
+        }
+
+        public bool verificar_descricao(string descricao, int cod_vantagem)
+        {
+            try
+            {
+                _conn = new Conexao();
+
+                string strselect = "select count(cod_vantagem) from vantagens where descricao = '" + descricao.Replace("'", "''") + "' and cod_vantagem <> " + cod_vantagem + "";
+                if (Convert.ToInt32(_conn.scalar(strselect)) > 0)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+
+            }
+            catch (Exception)
+            {
+                return true;
+            }
+        }
+
+        public string delete(int cod_vantagem)
+        {
+            string msg = "";
+            try
+            {
+                _conn = new Conexao();
+                _LogDao = new LogDao();
+
+                string strdelete = "delete from Vantagens where cod_vantagem = " + cod_vantagem + "";
+                _conn.execute(strdelete);
+                _LogDao.insert("Vantagem", "del", "id " + cod_vantagem);
+            }
+            catch (Exception)
+            {
+                msg = "Erro ao deletar o Atributo ";
+            }
+            return msg;
+        }
     }
 }

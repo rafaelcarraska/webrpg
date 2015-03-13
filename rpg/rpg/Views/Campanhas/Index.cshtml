@@ -19,10 +19,10 @@
                 <td></td>
                 <td>@Campanha.Descricao</td>
                 <td>
-                    <a href="#" onclick="clickmodal(@Campanha.Cod_Ficha)">Editar</a>
+                    <a href="javascript: clickmodal(@Campanha.Cod_Ficha)">Editar</a>
                 </td>
                 <td>
-                    <a href="#" onclick="deletar(@Campanha.Cod_Ficha, '@Campanha.Descricao', this)">Deletar</a>
+                    <a href="javascript: deletar(@Campanha.Cod_Ficha, '@Campanha.Descricao', this)">Deletar</a>
                 </td>
             </tr>
         }
@@ -30,7 +30,7 @@
 </table>
 <div class="modal" id="modal" style="width: 500px; height: 200px;">
     <div class="fechar">
-        <a href="#" onclick="fecharmodal()">Fechar</a>
+        <a href="javascript: fecharmodal()">Fechar</a>
     </div>
     <div class="titulomodal" style=" margin-left:33%;">
         <p id="titulomodal" style=" margin-left: 20px;">Editar </p>

@@ -59,5 +59,23 @@ namespace rpg.Dao
             return _Classe;
         }
 
+        public List<Classe> Listar_Classes_dt_cb()
+        {
+            _conn = new Conexao();
+            List<Classe> list_Classe = new List<Classe>();
+
+            DataTable dt_Classe = _conn.dataTable("select cod_vantagem, descricao from Vantagens where ativo = 1 order by descricao", "VANTAGEM");
+            foreach (DataRow row in dt_Classe.Rows)
+            {
+                list_Classe.Add(new Classe
+                {
+                    Cod_Classe = Convert.ToInt32(row["cod_vantagem"].ToString()),
+                    Descricao = row["descricao"].ToString()
+                });
+            }
+
+            return list_Classe;
+        }
+
     }
 }
