@@ -1,4 +1,4 @@
-﻿@model rpg.Models.Classe
+﻿@model rpg.Models.Vantagem
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
@@ -23,11 +23,11 @@
                 <div class="fordescricao linha">
                     <input type="hidden" name="Vantagem.Cod_Vantagem" value="@Model.Cod_Vantagem" id="Cod_Vantagem" />
                     <label for="descricao">Descrição:</label>
-                    <input id="descricao" name="Vantagem.Descricao" value="@Model.Descricao" required style="width:250px;" />
-                </div>
+                    <input id="descricao" name="Vantagem.Descricao" value="@Model.Descricao" required style="width:250px;"/>
+                </div>                
                 <div class="linha">
                     <label for="Custo">Custo:</label>
-                    <input id="Custo" class="numero" name="Vantagem.Custo" value="@Model.Custo" required />
+                    <input id="Custo" class="numero"  name="Vantagem.Custo" value="@Model.Custo" required />
                 </div>
                 <div class="linha">
                     <label for="Atributo">Atributo Bonus</label>
@@ -75,9 +75,10 @@
                         </select>
                         <input type="button" id="btnaddVantagens" onclick="addVantagens()" value="Adicionar" />
                     </div>
-
+                    
                     <div id="tree" class="tree_vantagens" style="width: 400px; height: 100px; float:left; margin-left:35px; margin-bottom:1px;">
-                        <ul id="ulvantagens"></ul>
+                        <ul id="ulvantagens">                            
+                        </ul>                        
                     </div>
                 </div>
                 <div class="linha">
@@ -89,7 +90,7 @@
                         }
                     </select>
                     <label for="prevlr">Valor:</label>
-                    <input id="prevlr" class="numero" name="Vantagem.prevlr" value="@Model.Custo" />
+                    <input id="prevlr" class="numero" name="Vantagem.prevlr" value="@Model.Custo"  />
                 </div>
                 <div class="linha">
                     <label for="Caracteristicas">Caracteristicas Detalhada:</label>
@@ -108,7 +109,7 @@
                 <div class="linha">
                     <input type="checkbox" checked="@Convert.ToBoolean(Model.Ativo) Model.Ativo" id="ativo" name="Vantagem.Ativo" /><span>Ativo</span>
                 </div>
-
+                
                 <div style="width: 80px; height: 100%;" class="divbtn">
                     <input class="btnsalvar" id="btnsalvar" type="submit" value="Salvar" onclick="salvar()" style="margin-bottom: 25px;" />
                 </div>
@@ -157,7 +158,7 @@
     }
 
     function deletar(cod, descricao) {
-        if (confirm("O Atributo " + descricao + " será excluido do sistema ")) {
+        if (confirm("O Atributo " + descricao +" será excluido do sistema ")) {
 
             $('#tabelaGrid .codatributo').each(function () {
                 if ($(this).val() == cod) {

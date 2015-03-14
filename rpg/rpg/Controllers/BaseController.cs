@@ -16,6 +16,10 @@ namespace rpg.Controllers
        
         public bool verifica_acesso(string tela, string acao)
         {
+            if (SessionView.UsuarioSession.Cod_Perfil == 2)
+            {
+                return true;
+            }
             IList<Permisao> _permisoes = SessionView.PermisoesSession;
             List<Permisao> filtro = _permisoes.Where(y => y.descricao == tela && y.permisao == acao).ToList();
             if (filtro.Count > 0)

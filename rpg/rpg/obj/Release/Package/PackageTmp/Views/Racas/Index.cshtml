@@ -2,7 +2,6 @@
 @{
     Layout = "~/Views/Shared/_Grid.cshtml";
 }
-@Styles.Render("~/bundles/modalcss")
 
 <table id="tabelaGrid" cellpadding="0" cellspacing="0">
     <thead>
@@ -25,7 +24,7 @@
                     @Html.RouteLink("Editar", "Editar_Raca", new {id = Raca.Cod_Raca})
                 </td>
                 <td>
-                    <a href="#" onclick="deletar(@Raca.Cod_Raca, '@Raca.Descricao', this)">Deletar</a>
+                    <a href="javascript: deletar(@Raca.Cod_Raca, '@Raca.Descricao', this)">Deletar</a>
                 </td>
             </tr>
         }
@@ -33,7 +32,7 @@
 </table>
 <div class="modal" id="modal" style="width: 500px; height: 200px;">
     <div class="fechar">
-        <a href="#" onclick="fecharmodal()">Fechar</a>
+        <a href="javascript: fecharmodal()">Fechar</a>
     </div>
     <div class="titulomodal" style=" margin-left:33%;">
         <p id="titulomodal" style=" margin-left: 20px;">Editar </p>
@@ -59,19 +58,19 @@
     <p class="textjs">Aguarde</p>
 </div>
 <script>
-    function clickmodal(id) {
-        if (id != 0) {
-            $('#titulomodal').html("Editar Raça");
-        }
-        $('.modal').bPopup({
-            modalClose: false
-        });
-    }
+    //function clickmodal(id) {
+    //    if (id != 0) {
+    //        $('#titulomodal').html("Editar Raça");
+    //    }
+    //    $('.modal').bPopup({
+    //        modalClose: false
+    //    });
+    //}
 
-    function botaonovo() {
-        $('#titulomodal').html("Nova Raça");
-        clickmodal(0);
-    }
+    //function botaonovo() {
+    //    $('#titulomodal').html("Nova Raça");
+    //    clickmodal(0);
+    //}
 
     function deletar(id, descricao, botao) {
         if (confirm("A Raça " + descricao + " seá excluida do sistema ")) {

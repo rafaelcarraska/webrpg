@@ -36,6 +36,11 @@ function fecharmodal() {
     bPopup.close();
 }
 
+function fecharmodalsenha() {
+    var bPopup = $('.modalsenha').bPopup();
+    bPopup.close();
+}
+
 function beforeSendFunction() {
     $('.modaljs').bPopup({
         modalClose: false
@@ -69,4 +74,8 @@ function limite(campo, caractres) {
         $(campo).val($(campo).val().substr(0, caractres));
         alert("O Campo não pode ter mais de " + caractres + " caracteres.");
     }
+}
+
+function isNumber(n) {
+    return !isNaN(parseFloat(n)) && isFinite(n);
 }

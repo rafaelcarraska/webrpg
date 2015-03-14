@@ -33,3 +33,14 @@
     margin-bottom:2px;
     margin-left:-25px;
 }
+.add_classes{
+    float:left;
+    margin-top:45px;
+}
+.tree_classes{
+    border-style:ridge;
+}
+.tree_classes ul li{
+    margin-bottom:2px;
+    margin-left:-25px;
+}

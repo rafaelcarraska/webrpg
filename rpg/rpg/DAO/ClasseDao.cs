@@ -50,8 +50,8 @@ namespace rpg.Dao
                 if (!string.IsNullOrEmpty(dt_classe.Rows[0]["Vantagens_Desvantagens"].ToString()))
                 {
                     _Classe.Vantagens_Desvantagens = new List<int>(Array.ConvertAll(dt_classe.Rows[0]["Vantagens_Desvantagens"].ToString().Split('_'), int.Parse));
-                }                
-                _Classe.Pericias = dt_classe.Rows[0]["Pericias"].ToString();
+                }
+                _Classe.Pericias = new List<int>(Array.ConvertAll(dt_classe.Rows[0]["Pericias"].ToString().Split('_'), int.Parse));
                 _Classe.Custo = Convert.ToInt32(dt_classe.Rows[0]["Custo"].ToString());
                 _Classe.Ativo = Convert.ToBoolean(dt_classe.Rows[0]["Ativo"].ToString());
             }

@@ -2,7 +2,6 @@
 @{
     Layout = "~/Views/Shared/_Grid.cshtml";
 }
-@Styles.Render("~/bundles/modalcss")
 
 <table id="tabelaGrid" cellpadding="0" cellspacing="0">
     <thead>
@@ -17,7 +16,7 @@
 </table>
 <div class="modal" id="modal" style="width: 500px; height: 200px;">
     <div class="fechar">
-        <a href="#" onclick="fecharmodal()">Fechar</a>
+        <a href="javascript: fecharmodal()">Fechar</a>
     </div>
     <div class="titulomodal" style=" margin-left:33%;">
         <p id="titulomodal" style=" margin-left: 20px;">Editar </p>

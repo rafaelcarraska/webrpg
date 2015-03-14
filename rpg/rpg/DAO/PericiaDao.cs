@@ -83,12 +83,12 @@ namespace rpg.Dao
                 _conn = new Conexao();
                 _LogDao = new LogDao();
 
-                string strInsert = "insert into vantagens (Descricao, Custo, Bonus_Atributo, Pre_Vantagens, Pre_Requisitos, Caracteristicas, Campanha, Ativo) "
-                    + " values('" + vantagem.Descricao.Replace("'", "''") + "', " + vantagem.Custo + ", '" + string.Join<string>(";", vantagem.Bonus_Atributo).Replace("'", "''") + "', '"
-                    + string.Join<int>("_", vantagem.Pre_Vantagens).Replace("'", "''") + "', '" + vantagem.Pre_Requisitos.Replace("'", "''") + "', '" + vantagem.Caracteristicas.Replace("'", "''") + "', "
-                    + vantagem.Campanha + ", '" + vantagem.Ativo.ToString() + "')";
+                string strInsert = "insert into pericias (Descricao, Cod_Atributo, penalidade_peso, requisito_classe, Treinada, Caracteristicas, Campanha, Ativo) "
+                    + " values('" + pericia.Descricao.Replace("'", "''") + "', " + pericia.Cod_Atributo + ", " + pericia.penalidade_peso + ", '"
+                    + string.Join<int>("_", pericia.requisito_classe).Replace("'", "''") + "', '" + pericia.Treinada.ToString() + "', '" + pericia.Caracteristicas.Replace("'", "''") + "', "
+                    + pericia.Campanha + ", '" + pericia.Ativo.ToString() + "')";
                 _conn.execute(strInsert);
-                _LogDao.insert("Vantagem", "add", "");
+                _LogDao.insert("Pericia", "add", "");
             }
             catch (Exception)
             {
@@ -97,7 +97,7 @@ namespace rpg.Dao
             return msg;
         }
 
-        public string update(Vantagem vantagem)
+        public string update(Pericia pericia)
         {
             string msg = "";
             try
@@ -105,15 +105,15 @@ namespace rpg.Dao
                 _conn = new Conexao();
                 _LogDao = new LogDao();
 
-                string strupdate = "update vantagens set Descricao = '" + vantagem.Descricao.Replace("'", "''") + "', Custo = " + vantagem.Custo
-                    + ", Bonus_Atributo = '" + string.Join<string>(";", vantagem.Bonus_Atributo).Replace("'", "''") + "', Pre_Vantagens = '" + string.Join<int>("_", vantagem.Pre_Vantagens).Replace("'", "''")
-                    + "', Pre_Requisitos = '" + vantagem.Pre_Requisitos.Replace("'", "''") + "', Caracteristicas = '" + vantagem.Caracteristicas.Replace("'", "''") + "', Campanha = " + vantagem.Campanha + ", Ativo = '" + vantagem.Ativo.ToString() + "') ";
+                string strupdate = "update vantagens set Descricao = '" + pericia.Descricao.Replace("'", "''") + "', Cod_Atributo = " + pericia.Cod_Atributo
+                    + ", penalidade_peso = " + pericia.penalidade_peso + ", requisito_classe = '" + string.Join<int>("_", pericia.requisito_classe).Replace("'", "''")
+                    + "', Treinada = '" + pericia.Treinada.ToString() + "', Caracteristicas = '" + pericia.Caracteristicas.Replace("'", "''") + "', Campanha = " + pericia.Campanha + ", Ativo = '" + pericia.Ativo.ToString() + "') ";
                 _conn.execute(strupdate);
-                _LogDao.insert("Vantagem", "up", "cod_vantagem = " + vantagem.Cod_Vantagem.ToString());
+                _LogDao.insert("Pericia", "up", "cod_Pericia = " + pericia.Cod_Pericia.ToString());
             }
             catch (Exception)
             {
-                msg = "Erro ao atualizar a Vantagem ('" + vantagem.Descricao + "')";
+                msg = "Erro ao atualizar a Vantagem ('" + pericia.Descricao + "')";
             }
             return msg;
         }

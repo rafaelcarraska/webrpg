@@ -44,7 +44,7 @@ namespace rpg.Controllers
             CampanhaDao _CampanhaDao = new CampanhaDao();
             ViewBag.Campanhas = _CampanhaDao.Listar_Campanhas_cb_mestre();
             ClasseDao _ClasseDao = new ClasseDao();
-            ViewBag.Classe = _ClasseDao.Listar_Classes_dt_cb();
+            ViewBag.Classes = _ClasseDao.Listar_Classes_dt_cb();
             return View(_pericias);
         }
 
