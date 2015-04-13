@@ -1,0 +1,92 @@
+﻿#bloco {
+  background-color:#183442;
+  border:2px solid #183442;
+  display:table;
+  margin:100px auto 0;
+  padding:10px;
+  width:580px;
+}
+#bloco #areaDescricao {
+  color:#CCCCCC;
+  float:left;
+  width:200px;
+}
+#bloco #areaDescricao h1 {
+  color:#FFFFFF;
+  font-family:Arial;
+  font-size:16px;
+  font-weight:bold;
+  margin:2px;
+}
+#bloco #areaForm {
+  float:right;
+}
+#bloco #areaForm fieldset {
+  background-color:#FFFFFF;
+  margin:3px;
+  padding:10px;
+  width:300px;
+}
+fieldset input, label, select {
+  display:block;
+  float:left;
+}
+fieldset label {
+  padding:3px 10px 10px 0;
+  text-align:right;
+  width:70px;
+}
+fieldset input, select, textarea {
+  font-size:12px;
+  padding:2px;
+}
+#bloco #areaForm fieldset .linha {
+  display:inline-block;
+  width:100%;
+}
+#bloco #areaForm fieldset .sublinha {
+  display:inline-block;
+  width:100%;
+}
+#bloco #areaForm fieldset #botaoLogar {
+  background-color:#DE5D29;
+  border:1px solid #FFFFFF;
+  color:#FFFFFF;
+  float:left;
+  font-size:11px;
+  font-weight:bold;
+  padding:5px 9px;
+  margin-left:80px;
+}
+#bloco #areaForm fieldset .direita {
+  float:right;
+}
+.link {
+  margin-left:600px;
+  margin-top:50px;
+}
+#senha 
+{
+    width:200px;
+}
+body {
+  font-family:Tahoma;
+  font-size:12px;
+  letter-spacing:1px;
+  line-height:16px;
+}
+#empresa 
+{
+    width:210px;
+}
+#login
+{
+    width:200px;
+}
+
+
+
+
+
+
+

@@ -1,0 +1,264 @@
+﻿body 
+{
+    margin:0;
+    padding:0;
+    font-family:Tahoma;
+    font-size:12px;
+    line-height:16px;
+    letter-spacing:1px;
+}
+form
+{
+    margin:0px;
+    font-size:12px;
+}
+fieldset
+{
+    border:0px;
+}
+fieldset input
+{
+    padding:2px;
+}
+table
+{
+    font-size:12px;
+}
+.ul
+{
+    margin-bottom:-3px;
+}
+ul li
+{
+    margin-bottom:-3px;
+}
+strong
+{
+    font-weight:bold;
+}
+a
+{
+    text-decoration:none;
+}
+p
+{
+    margin:3px;
+}
+.topo
+{
+    height:90px;
+    float:left;
+    width:100%;
+    min-width:700px;
+}
+.linha1 
+{
+    height:26px;
+    width:100%;
+    border-bottom:1px solid #000;
+    background-color:#94aa9d;
+}
+.linha2 
+{
+    height:36px;
+    width:100%;
+    background-color:#183442;
+}
+.linha3
+{
+    height:24px;
+    width:100%;
+}
+.logotipo
+{
+    float:left;
+    height:90px;
+    width:186px;
+
+}
+.box_data_empresa 
+{
+    float:left;
+}
+.box_logout 
+{
+    float:right;
+}
+.topo_house
+{
+    float:left;
+    margin-top:5px;
+    margin-left:5px;
+}
+.topo_data
+{
+    float:left;
+    margin-top:5px;
+    margin-left:5px;
+}
+.topo_company
+{
+    float:left;
+    margin-top:5px;
+    margin-left:10px;
+}
+.topo_house
+{
+    float:left;
+    margin-top:6px;
+}
+.topo_empresa
+{
+    float:left;
+    margin-left:5px;
+    margin-top:5px;
+}
+.topo_bemvindo
+{
+    float:right;
+    margin-right:8px;
+    margin-top:5px;
+}
+.topo_pencil
+{
+    float:right;
+    margin-top:5px;
+    margin-right:15px;
+}
+.topo_key
+{
+    float:right;
+    margin-top:5px;
+    margin-right:15px;
+}
+.topo_cancel
+{
+    float:right;
+    margin-top:5px;
+    margin-right:15px;
+}
+.divisa 
+{
+    width:100%;
+    height:10px;
+    margin-bottom:10px;
+    clear:both;
+    background-image:url("../../Imagens/linha.gif");
+}
+.topo_seta 
+{
+    float:left;
+    margin-top:8px;
+    float:left;
+}
+.topo_subtitulo
+{
+    color:#DE5D29;
+    float:left;
+    font-family:Arial;
+    font-size:14px;
+    font-weight:bold;
+    margin:4px;
+    padding:4px 0 0;
+    margin-top:1px;
+}
+
+#topo .divMenu
+{
+	width:100%;
+	color:#fff;
+	display:table;
+	border-top:1px solid #000;
+}
+
+ul.menubar{
+  margin: 0px;
+  padding: 0px;
+  z-index:1000;
+}
+ 
+ul.menubar .submenu{
+  margin: 0px;
+  padding: 0px;
+  list-style: none;
+  float:left;
+  display:inline;
+  z-index:1000;
+}
+ul.menubar .submenu a
+{
+	color:#fff;
+}
+ul.menubar .submenu a:hover
+{
+	color:#fff;
+}
+ 
+ul.menubar ul.menu{
+  display: none;
+  position: absolute;
+  margin: 0px;
+  z-index:1000;
+}
+ 
+ul.menubar a{
+  display:block;
+  text-decoration: none;
+  padding: 10px;
+  color:#fff;
+  font-weight:bold;
+}
+ul.menubar a:hover
+{
+	color:#DE5D29;
+}
+ 
+ul.menu, ul.menu ul{
+  margin: 0;
+  padding: 0;
+  border-bottom: 1px solid #EFEAA9;
+  background-color:#CEDBBE;
+  background-color:#EFEAA9;
+  background-color:#F5F8B0;
+  background-color:#F4F6B9;
+  width: 180px; /* Width of Menu Items */
+}
+
+ul.menu, ul.menu .submenu{
+  background-color:#F4F6B9;
+  width: 180px;
+}
+ul.menu, ul.menu .submenu a
+{
+	color:#565742;
+}
+ul.menu, ul.menu .submenu a:hover
+{
+	color:#565742;
+}
+ 
+ul.menu li{
+  position: relative;
+  list-style: none;
+  border: 0px;
+}
+ 
+ul.menu li a{
+  display: block;
+  text-decoration: none;
+  border-bottom: 0px;
+  padding: 5px 10px 5px 5px;
+  color:#565742;
+}
+ 
+ul.menu li sup{
+  font-weight:bold;
+  font-size:7px;
+  color: red;
+}
+
+
+
+
+
+

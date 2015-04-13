@@ -1,0 +1,60 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Autenticação - RPG - </title>
+
+    @Styles.Render("~/bundles/Logincss")
+    @section Scripts
+    {
+        @Scripts.Render("~/bundles/Basejquery")
+    }
+
+</head>
+<body>
+    @if (TempData["notice"] != null)
+    {
+        <script>alert("Login e senha informados estão incorretos.");</script>
+    }
+    <form id="form_principal" action="/Login/Autentica" method="post">
+        <div id="bloco">
+            <div id="areaDescricao">
+                <h1>Autenticação</h1>
+                <p>
+                    Informe seus dados de acesso nos campos ao lado para
+                    ter acesso ao nosso sistema.
+                </p>
+            </div>
+            <div id="areaForm">
+                <fieldset>
+                    <span class="linha">
+                        <label for="login">Login </label>
+                        <input type="text" id="login" name="login" required />
+                    </span>
+                    <span class="linha">
+                        <label for="senha">Senha </label>
+                        <input type="password" id="senha" name="senha" required />
+                    </span>
+                    @*<span class="linha">
+                        <label for="Empresa">Empresa</label>
+                        <select id="empresa" name="empresa">
+                            @foreach (var empresa in ViewBag.empresa)
+                            {
+                                <option value="@empresa.Cod_Empresa" selected="@empresa.Cod_Empresa.Equals(ViewBag.empresaerr.Cod_Empresa)">@empresa.Nome_Razao_Social</option>
+                            }
+                        </select>
+                    </span>*@
+                    <span class="linha">
+                        <input type="submit" value="Logar" id="botaoLogar" />
+                    </span>
+                </fieldset>
+            </div>
+        </div>
+    </form>
+</body>
+</html>

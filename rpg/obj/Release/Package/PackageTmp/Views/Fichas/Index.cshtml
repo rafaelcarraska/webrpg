@@ -1,0 +1,110 @@
+﻿@model IList<rpg.Models.Ficha>
+@{
+    Layout = "~/Views/Shared/_Grid.cshtml";
+}
+@Styles.Render("~/bundles/modalcss")
+
+<table id="tabelaGrid" cellpadding="0" cellspacing="0">
+    <thead>
+        <tr class="titulo">
+            <td></td>
+            <td>Descrição</td>
+            <td></td>
+            <td></td>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var Ficha in Model)
+        {
+            <tr class="linha">
+                <td></td>
+                <td>@Ficha.Descricao</td>
+                <td>
+                    <a href="#" onclick="clickmodal(@Ficha.Cod_Ficha)">Editar</a>
+                </td>
+                <td>
+                    <a href="#" onclick="deletar(@Ficha.Cod_Ficha, '@Ficha.Descricao', this)">Deletar</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<div class="modal" id="modal" style="width: 800px; height: 500px;">
+    <div class="fechar">
+        <a href="#" onclick="fecharmodal()">Fechar</a>
+    </div>
+    <div class="titulomodal" style=" margin-left:42%;">
+        <p id="titulomodal" style=" margin-left: 20px;">Editar </p>
+    </div>
+    <form id="form" method="post">
+        <div class="modalform" style="width: 700px; height: 100%; float:left; margin-top:10px;">
+            <div class="fordescricao linha">
+                <input type="hidden" name="Atributos.Cod_Atributo" value="0" id="cod_atributo" />
+                <label for="descricao">Descrição:</label>
+                <input id="descricao" name="Atributos.Descricao" required />
+            </div>
+            <span class="selecione">Selecione</span>
+            <div id="tree" class="tree" style="width: 300px; height: 350px; float:left; margin-right: 15px;">
+                <ul>
+                    @foreach (var Atributos in @ViewBag.Atributos)
+                    {
+                        <li>
+                            <input type="checkbox" value="@Atributos.Cod_Atributo" /><span>@Atributos.Descricao </span>
+                        </li>
+                    }
+                </ul>
+            </div>
+            <div class="linha">
+                <label for="Calc_HP">Calc. HP:</label>
+                <input id="Calc_HP" title="aes" name="Ficha.Calc_HP" placeholder="(Resistencia + Mod.Força) / 2 + Raça x Lv + Classe x Lv" required style="width: 300px;" />
+            </div>
+            <div class="linha">
+                <label for="Calc_MP">Calc. MP:</label>
+                <input id="Calc_MP" name="Ficha.Calc_MP" placeholder="(Qi + Mod.Habilidade) / 2 + Raça x Lv + Classe x Lv" required style="width: 300px;" />
+            </div>
+            <div class="linha">
+                <input type="checkbox" value="CA" id="CA" name="Ficha.CA" /><span>C.A.</span>
+            </div>
+            <div class="linha">
+                <input type="checkbox" value="Redutor_Nv_Vida" id="Redutor_Nv_Vida" name="Ficha.Redutor_Nv_Vida" /><span>Redutor por Nivel Vida</span>
+            </div>
+            <div class="linha">
+                <input type="checkbox" value="Redutor_Peso" id="Redutor_Peso" name="Ficha.Redutor_Peso" /><span>Redutor por Peso</span>
+            </div>
+            <div class="linha">
+                <input type="checkbox" value="ativo" id="ativo" name="Ficha.Ativo" /><span>Ativo</span>
+            </div>
+        </div>
+        <div style="width: 80px; height: 100%;" class="divbtn">
+            <input class="btnsalvar" id="btnsalvar" type="submit" value="Salvar" onclick="salvar()" style="margin-top: 425px;" />
+        </div>
+    </form>
+</div>
+
+<div class="modaljs" id="modaljs">
+    <p class="textjs">Aguarde</p>
+</div>
+<script>
+    function clickmodal(id) {        
+        if (id != 0) {
+            $('#titulomodal').html("Editar Ficha");
+        }
+        $('.modal').bPopup({
+            modalClose: false
+        });
+    }
+
+    function botaonovo() {
+        $('#titulomodal').html("Nova Ficha");
+        clickmodal(0);
+    }
+
+    function deletar(id, descricao, botao) {
+        if (confirm("A Ficha " + descricao +" seá excluida do sistema ")) {
+            var par = $(botao).parent().parent()
+            par.remove();
+            $('table tbody tr:odd').removeClass("zebraUm zebraDois").addClass('zebraUm');
+            $('table tbody tr:even').removeClass("zebraUm zebraDois").addClass('zebraDois');
+        }
+    }    
+</script>   

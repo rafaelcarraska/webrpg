@@ -1,0 +1,214 @@
+﻿
+.delet {
+  background:none !important;
+  border:none;
+  margin-left:0;
+  padding:0 !important;
+}
+.botaoNovo {
+  margin-left:60px;
+}
+body div.botoes {
+  border-top-color:#CCCCCC;
+  border-top-style:solid;
+  border-top-width:1px;
+  display:inline-block;
+  position:relative;
+  text-align:right;
+  top:0;
+  width:100%;
+}
+fieldset div.botoes {
+  border:0;
+  display:inline-block;
+  margin:0;
+  padding:0;
+  position:relative;
+  text-align:right;
+  top:5px;
+  width:100%;
+}
+fieldset div.botoes input {
+  float:right;
+}
+#conteudo {
+  display:table;
+  width:100%;
+}
+#boxFiltro {
+  border-bottom-color:#C6CFF7;
+  border-bottom-style:solid;
+  border-bottom-width:1px;
+  border-top-color:#C6CFF7;
+  border-top-style:solid;
+  border-top-width:2px;
+  float:left;
+  width:100%;
+}
+#boxFiltro h3 {
+  color:#2145BD;
+  font-size:12px;
+  margin:0;
+  padding:8px;
+}
+#areaFiltro {
+  float:left;
+  padding-left:10px;
+  width:100%;
+}
+#boxGrid {
+  background-color:#EFEFFF;
+  float:left;
+  margin-left:45px;
+  margin-top:30px;
+  padding:5px 5px 0;
+  width:93%;
+}
+#nav {
+  float:left;
+  padding:4px 0;
+  width:100%;
+}
+#nav .funcoes {
+  float:left;
+}
+#nav .ordenar {
+  float:left;
+  margin-left:20px;
+}
+#nav .ordenar select {
+  display:inline;
+  float:none;
+  font-size:10px;
+  padding:0;
+}
+#nav .botoes {
+  border:0;
+  display:inline;
+  float:right;
+  margin:0;
+  padding:0;
+  width:auto;
+}
+#nav .botoess {
+  border:0;
+  display:inline;
+  float:right;
+  margin:0;
+  padding:0;
+  width:auto;
+}
+#nav .botaoNovo {
+  color:#2145BD;
+  font-weight:bold;
+  margin-right:30px;
+}
+#nav .botaoNovo img {
+  border:0;
+  float:left;
+  margin-left:10px;
+}
+#nav .botaoDeletar {
+  background-color:#EFEFFF;
+  background-position:0 50%;
+  background-repeat:no-repeat;
+  border:0;
+  color:#2145BD;
+  font-weight:bold;
+  padding-left:10px;
+}
+#grid {
+  background-color:#FFFFFF;
+  border-top-color:#C6CFF7;
+  border-top-style:solid;
+  border-top-width:1px;
+  float:left;
+  width:100%;
+}
+#grid div.item {
+  display:table;
+  padding:5px 3px;
+  width:982px;
+}
+#grid div.item table {
+  width:100%;
+}
+#grid div.item table .funcoes {
+  text-align:right;
+  width:100%;
+}
+#grid div.item table .funcoes a {
+  color:#DD1708;
+}
+#grid div.item table .body p {
+  margin:0;
+  padding:2px 0 2px 12px;
+}
+#grid div.item .check {
+  float:left;
+  margin:0 5px 0 0;
+}
+#grid div.separador {
+  color:#EEEEEE;
+  text-align:center;
+  width:782px;
+}
+table#tabelaGrid {
+  width:100%;
+}
+table#tabelaGrid tr td {
+  font-size:11px;
+  padding:3px 5px;
+}
+table#tabelaGrid tr th {
+  font-size:11px;
+  padding:3px 5px;
+  text-align: left;
+}
+table#tabelaGrid tr.titulo td {
+  background-color:#C6CFF7;
+  font-size:11px;
+  padding:3px 0;
+}
+table#tabelaGrid tr.titulo th {
+  background-color:#C6CFF7;
+  font-size:11px;
+  padding:3px 0;  
+  text-align: left;
+}
+table#tabelaGrid tr td.funcoes {
+  text-align:right;
+}
+table#tabelaGrid tr td.funcoes a {
+  color:#DD1708;
+}
+table#tabelaGrid tr td.funcoes a:hover {
+  color:#DD1708;
+  text-decoration:underline;
+}
+table#tabelaGrid tr td.valor {
+  text-align:right;
+}
+table#tabelaGrid tr td.check {
+  width:10px;
+}
+#boxPaginacao {
+  float:left;
+  height:10px;
+  padding:4px 0;
+  text-align:center;
+  width:100%;
+}
+.boxPaginacao a {
+  color:#2145BD;
+  padding:1px;
+}
+.zebraUm 
+{
+    background: #ffffff;
+
+}
+.zebraDois 
+{
+    background: #EBF3EB;
+}

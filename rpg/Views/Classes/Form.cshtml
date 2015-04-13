@@ -1,0 +1,34 @@
+﻿@model rpg.Models.Classe
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@Styles.Render("~/bundles/formcss")
+
+@Scripts.Render("~/bundles/modaljquery")
+
+<div>
+    <div id="boxForm">
+        <div id="conteudo">
+            <form method="post">
+
+                <div class="fordescricao linha">
+                    <input type="hidden" name="Classe.Cod_Classe" value="@Model.Cod_Classe" id="Cod_Raca" />
+                    <label for="Descricao">Descrição:</label>
+                    <input id="Descricao" name="Classe.Descricao" value="@Model.Descricao" required />
+                </div>
+                <div class="linha">
+                    <label for="Descricao_Detalhada">Descrição Detalhada:</label>
+                    <textarea cols="40" rows="5" id="Descricao_Detalhada" name="Classe.Descricao_Detalhada">@Model.Descricao_Detalhada</textarea>
+                </div>
+                <div class="linha">
+                    <input type="checkbox" value="ativo" id="ativo" name="Classe.Ativo" /><span>Ativo</span>
+                </div>
+
+                <div style="width: 80px; height: 100%;" class="divbtn">
+                    <input class="btnsalvar" id="btnsalvar" type="submit" value="Salvar" onclick="salvar()" style="margin-top: 125px;" />
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

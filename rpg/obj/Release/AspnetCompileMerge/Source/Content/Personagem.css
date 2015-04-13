@@ -1,0 +1,12 @@
+﻿.logotipo 
+{
+    margin-top:16px;
+    margin-left:51px;
+    height:200px;
+    width:200px;
+    float:left;
+    background:white;
+    box-shadow: 0px 0px 15px #999;
+    display:flex;
+    overflow:hidden;
+}
