@@ -41,6 +41,13 @@ namespace rpg.Controllers
             return View();
         }
 
+        [Route("Ficha/{id}", Name = "Ficha")]
+        public ActionResult Ficha(int id)
+        {
+            ViewBag.idjpg = id + ".jpg";
+            return View();
+        }
+
         [Route("Editar_Personagem/{id}", Name = "Editar_Personagem")]
         public ActionResult Editar_Personagem(int id)
         {

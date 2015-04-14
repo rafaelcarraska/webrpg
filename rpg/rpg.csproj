@@ -210,6 +210,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\Basico.css" />
+    <Content Include="Content\bootstrap-theme.css" />
+    <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Form.css" />
@@ -220,6 +222,7 @@
     <Content Include="Content\Mestre.css" />
     <Content Include="Content\Personagem.css" />
     <Content Include="Content\Modal.css" />
+    <Content Include="Content\style.css" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Imagens\icones\cancel.gif" />
@@ -240,6 +243,13 @@
     <Content Include="Imagens\icones\images\ui-icons_cd0a0a_256x240.png" />
     <Content Include="Imagens\icones\key.gif" />
     <Content Include="Imagens\icones\pencil.gif" />
+    <Content Include="Imagens\img\apple-touch-icon-114-precomposed.png" />
+    <Content Include="Imagens\img\apple-touch-icon-144-precomposed.png" />
+    <Content Include="Imagens\img\apple-touch-icon-57-precomposed.png" />
+    <Content Include="Imagens\img\apple-touch-icon-72-precomposed.png" />
+    <Content Include="Imagens\img\favicon.png" />
+    <Content Include="Imagens\img\glyphicons-halflings-white.png" />
+    <Content Include="Imagens\img\glyphicons-halflings.png" />
     <Content Include="Imagens\linha.gif" />
     <Content Include="Imagens\logotipo.jpg" />
     <Content Include="Imagens\Personagens\pers_1.jpg" />
@@ -247,11 +257,15 @@
     <Content Include="Scripts\bmodal.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\html5shiv.js" />
     <Content Include="Scripts\jquery-1.5.1.min.js" />
     <Content Include="Scripts\jquery-2.1.3.min.js" />
     <Content Include="Scripts\jquery-ui - 1.11.3.min.js" />
+    <Content Include="Scripts\jquery.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
+    <Content Include="Scripts\less-1.3.3.min.js" />
     <Content Include="Scripts\modernizr-1.7.min.js" />
+    <Content Include="Scripts\scripts.js" />
     <Content Include="Scripts\Uteis.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -334,7 +348,51 @@
     <Content Include="Views\Home\Editar_Personagem.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="less\alerts.less" />
+    <Content Include="less\badges.less" />
+    <Content Include="less\bootstrap.less" />
+    <Content Include="less\breadcrumbs.less" />
+    <Content Include="less\button-groups.less" />
+    <Content Include="less\buttons.less" />
+    <Content Include="less\carousel.less" />
+    <Content Include="less\close.less" />
+    <Content Include="less\code.less" />
+    <Content Include="less\component-animations.less" />
+    <Content Include="less\dropdowns.less" />
+    <Content Include="less\forms.less" />
+    <Content Include="less\glyphicons.less" />
+    <Content Include="less\grid.less" />
+    <Content Include="less\input-groups.less" />
+    <Content Include="less\jumbotron.less" />
+    <Content Include="less\labels.less" />
+    <Content Include="less\list-group.less" />
+    <Content Include="less\media.less" />
+    <Content Include="less\mixins.less" />
+    <Content Include="less\modals.less" />
+    <Content Include="less\navbar.less" />
+    <Content Include="less\navs.less" />
+    <Content Include="less\normalize.less" />
+    <Content Include="less\pager.less" />
+    <Content Include="less\pagination.less" />
+    <Content Include="less\panels.less" />
+    <Content Include="less\popovers.less" />
+    <Content Include="less\print.less" />
+    <Content Include="less\progress-bars.less" />
+    <Content Include="less\responsive-utilities.less" />
+    <Content Include="less\scaffolding.less" />
+    <Content Include="less\tables.less" />
+    <Content Include="less\theme.less" />
+    <Content Include="less\thumbnails.less" />
+    <Content Include="less\tooltip.less" />
+    <Content Include="less\type.less" />
+    <Content Include="less\utilities.less" />
+    <Content Include="less\variables.less" />
+    <Content Include="less\wells.less" />
     <None Include="Properties\PublishProfiles\RPG.pubxml" />
+    <Content Include="Views\Vantagens\Form.cshtml" />
+    <Content Include="Views\Pericias\Form.cshtml" />
+    <Content Include="Views\Itens\Form.cshtml" />
+    <Content Include="Views\Home\Ficha.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

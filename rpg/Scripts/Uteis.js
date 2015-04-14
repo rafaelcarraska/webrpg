@@ -36,6 +36,11 @@ function fecharmodal() {
     bPopup.close();
 }
 
+function fecharmodalsenha() {
+    var bPopup = $('.modalsenha').bPopup();
+    bPopup.close();
+}
+
 function beforeSendFunction() {
     $('.modaljs').bPopup({
         modalClose: false
@@ -44,10 +49,16 @@ function beforeSendFunction() {
 
 function successFunction(msg) {
     if (msg != "") {
-        alert(msg);
+        if (msg.substring(0, 1) == "/") {
+            alert("Operação realizada com sucesso.");
+            window.location.href = msg;
+        } else {
+            alert(msg);
+        }        
     }
-    ('#textjs').html("Sucesso!");
-    location.reload();
+    else {
+        alert("Operação realizada com sucesso.");
+    }
 }
 
 function errorFunction(msg) {
@@ -69,4 +80,8 @@ function limite(campo, caractres) {
         $(campo).val($(campo).val().substr(0, caractres));
         alert("O Campo não pode ter mais de " + caractres + " caracteres.");
     }
+}
+
+function isNumber(n) {
+    return !isNaN(parseFloat(n)) && isFinite(n);
 }

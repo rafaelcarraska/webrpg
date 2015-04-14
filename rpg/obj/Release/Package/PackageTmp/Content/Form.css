@@ -12,8 +12,35 @@
 }
 .linha{
     padding-bottom:10px;
+    float:left;
+    width:100%;
 }
 .ui-corner-right{
     height: 18px;
     margin-bottom: 3px;
+}
+.add_vantagens{
+    float:left;
+    margin-top:45px;
+}
+.tree_vantagens{
+    border-style:ridge;
+}
+.numero{
+    width:20px;
+}
+.tree_vantagens ul li{
+    margin-bottom:2px;
+    margin-left:-25px;
+}
+.add_classes{
+    float:left;
+    margin-top:45px;
+}
+.tree_classes{
+    border-style:ridge;
+}
+.tree_classes ul li{
+    margin-bottom:2px;
+    margin-left:-25px;
 }

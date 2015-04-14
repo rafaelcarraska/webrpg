@@ -1,0 +1,213 @@
+﻿@model rpg.Models.Item
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@Scripts.Render("~/bundles/UIjquery")
+@Styles.Render("~/bundles/UI_css")
+
+@Styles.Render("~/bundles/formcss")
+@Styles.Render("~/bundles/gridcss")
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('table tbody tr:odd').addClass('zebraUm');
+        $('table tbody tr:even').addClass('zebraDois');
+    });
+
+</script>
+
+<div>
+    <div id="boxForm">
+        <div id="conteudo">
+            <form method="post">
+                <div class="fordescricao linha">
+                    <input type="hidden" name="Item.Cod_Item" value="@Model.Cod_Item" id="Cod_Item" />
+                    <label for="descricao">Descrição:</label>
+                    <input id="descricao" name="Item.Descricao" value="@Model.Descricao" required style="width:250px;" />
+                </div>
+                <div class="linha">
+                    <label for="valor_min">Valor Minimo:</label>
+                    <input id="valor_min" class="numero" name="Item.Valor_Min" value="@Model.Valor_Min" required />
+                    <label for="valor_max">Valor Maximo:</label>
+                    <input id="valor_max" class="numero" name="Item.Valor_Max" value="@Model.Valor_Max" required />
+                </div>
+                <div class="linha">
+                    <input type="checkbox" checked="@Model.Up" id="up" name="Item.Up" /><span>Upgrade</span>
+                </div>
+                <div class="linha">
+                    <label for="bonus_atk_corpo">Bonus Ataque Corpo a Corpo:</label>
+                    <input id="bonus_atk_corpo" class="numero" name="Item.Bonus_Atk_Corpo" value="@Model.Bonus_Atk_Corpo" required />
+                </div>
+                <div class="linha">
+                    <label for="bonus_atk_distanc">Bonus Ataque a Distancia:</label>
+                    <input id="bonus_atk_distanc" class="numero" name="Item.Bonus_Atk_Distanc" value="@Model.Bonus_Atk_Distanc" required />
+                </div>
+                <div class="linha">
+                    <label for="decisivo">Decisivo:</label>
+                    <input id="decisivo" class="numero" name="Item.Decisivo" value="@Model.Decisivo" required />
+                    <label for="critico">Critico:</label>
+                    <input id="critico" class="numero" name="Item.Critico" value="@Model.Critico" required />
+                </div>
+                <div class="linha">
+                    <label for="dano">Dano:</label>
+                    <input id="dano" name="Item.Dano" value="@Model.Dano" style="width:250px;" />
+                </div>
+                
+                <div class="linha">
+                    <div class="add_vantagens">
+                        <label for="prevantagem">Pré Requisito Vantagem </label>
+                        <select id="cbprevantagem" name="cbprevantagem">
+                            @foreach (var Vantagens in ViewBag.Vantagens)
+                            {
+                                <option value="@Vantagens.Cod_Vantagem">@Vantagens.Descricao</option>
+                            }
+                        </select>
+                        <input type="button" id="btnaddVantagens" onclick="addVantagens()" value="Adicionar" />
+                    </div>
+
+                    <div id="tree" class="tree_vantagens" style="width: 400px; height: 100px; float:left; margin-left:35px; margin-bottom:1px;">
+                        <ul id="ulvantagens">
+                            @foreach (var vantload in ViewBag.vantagensload)
+                            {
+                                List<string> v_l = new List<string>(vantload.Split('_'));
+                                <li class="linha_li"><input class="codvantagem" type="hidden" value="@v_l[0]" /> @v_l[1]  <a href="javascript:deletarli(@v_l[0], '@v_l[1]')">Remover</a></li>
+                            }
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="linha">
+                    <label for="resistencia">Resistencia:</label>
+                    <input id="resistencia" class="numero" name="Item.Resistencia" value="@Model.Resistencia" required />
+                </div>
+                <div class="linha">
+                    <label for="peso">Peso:</label>
+                    <input id="peso" class="numero" name="Item.Peso" value="@Model.Peso" required />
+                </div>
+                <div class="linha">
+                    <label for="ca">Ca:</label>
+                    <input id="ca" class="numero" name="Item.Ca" value="@Model.Ca" required />
+                </div>
+                <div class="linha">
+                    <label for="raridade">Raridade:</label>
+                    <input id="raridade" class="numero" name="Item.Raridade" value="@Model.Raridade" required />
+                </div>
+                <div class="linha">
+                    <label for="tipo">Tipo</label>
+                    <select id="cbtipo" name="cbTipo">
+                        @foreach (var Item in ViewBag.Tipo)
+                        {
+                            <option value="@Item[0]" selected="@Item[0].Equals(Model.Tipo)">@Item[1]</option>
+                        }
+                    </select>
+                </div>
+                <div class="linha">
+                    <label for="penalidade">Penalidade:</label>
+                    <input id="penalidade" class="numero" name="Item.Penalidade" value="@Model.Penalidade" required />
+                </div>
+                <div class="linha">
+                    <input type="checkbox" checked="@Model.Duas_Maos" id="cbduas_maos" name="Item.Duas_Maos" /><span>Duas Mãos</span>
+                </div>
+                <div class="linha">
+                    <input type="checkbox" checked="@Model.Municao" id="cbmunicao" name="Item.Municao" /><span>Municao</span>
+                </div>
+                <div class="linha">
+                    <label for="Descricao_Detalhada">Caracteristicas Detalhada:</label>
+                    <textarea cols="106" rows="6" id="descricao_detalhada" name="Item.Descricao_Detalhada" style="display:inline-block; vertical-align:middle;">@Model.Descricao_Detalhada</textarea>
+                </div>
+                <div class="linha">
+                    <label for="campanha">Campanha</label>
+                    <select id="cbcampanha" name="cbCampanha">
+                        <option value="0">Global</option>
+                        @foreach (var Campanhas in ViewBag.Campanhas)
+                        {
+                            <option value="@Campanhas.Cod_Campanha" selected="@Campanhas.Cod_Campanha.Equals(Model.Campanha)">@Campanhas.Descricao</option>
+                        }
+                    </select>
+                </div>
+                <div class="linha">
+                    <input type="checkbox" checked="@Model.Ativo" id="cbativo" name="Item.Ativo" /><span>Ativo</span>
+                </div>
+
+                <div style="width: 80px; height: 100%;" class="divbtn">
+                    <input class="btnsalvar" id="btnsalvar" type="submit" value="Salvar" onclick="salvar()" style="margin-bottom: 25px;" />
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<script>
+
+    function addVantagens() {
+        var existe = 0;
+        $('#ulvantagens li .codvantagem').each(function () {
+            if ($(this).val() == $("#cbprevantagem option:selected").val()) {
+                existe = 1;
+                return false;
+            }
+        });
+        if (existe == 0) {
+            $('#ulvantagens').append('<li class="linha_li"><input class="codvantagem" type="hidden" value="' + $("#cbprevantagem option:selected").val() + '" /> ' + $("#cbprevantagem option:selected").text() + '  <a href="javascript:deletarli(' + $("#cbprevantagem option:selected").val() + ', \'' + $("#cbprevantagem option:selected").text() + '\')">Remover</a></li>');
+            //$("#cbprevantagem option:selected").remove();
+        }
+        else {
+            alert("A Vantagem " + $("#cbprevantagem option:selected").text() + " já existe");
+        }
+    }
+
+    function deletarli(cod, descricao) {
+        if (confirm("A Vantagem " + descricao + " será excluido do sistema ")) {
+
+            $('#ulvantagens li .codvantagem').each(function () {
+                if ($(this).val() == cod) {
+                    $(this).parent().remove();
+                    //$("#cbprevantagem").append($('<option></option>').val(cod).html(descricao));
+                    return false;
+                }
+            });
+        }
+    }
+
+    function salvar() {
+        var Cod_Item = $('#Cod_Item').val();
+        var Descricao = $('#descricao').val();
+        var Valor_Min = $('#valor_min').val();
+        var Valor_Max = $('#valor_max').val();
+        var Up = $('#up').prop('checked');
+        var Bonus_Atk_Corpo = $('#bonus_atk_corpo').val();
+        var Bonus_Atk_Distanc = $('#bonus_atk_distanc').val();
+        var Decisivo = $('#decisivo').val();
+        var Critico = $('#critico').val();
+        var Resistencia = $('#resistencia').val();
+        var Peso = $('#peso').val();
+        var Ca = $('#ca').val();
+        var Raridade = $('#raridade').val();
+        var Tipo = $('#cbtipo').val();
+
+        var Pre_Requisito = '';
+        $('#ulvantagens li .codvantagem').each(function () {
+            Pre_Requisito = Pre_Requisito + $(this).val() + "_";
+        });
+
+        var Penalidade = $('#penalidade').val();
+        var Duas_Maos = $('#cbduas_maos').prop('checked');
+        var Municao = $('#cbmunicao').prop('checked');
+        var Descricao_Detalhada = $('#descricao_detalhada').val();
+        var Ativo = $('#cbativo').prop('checked');
+        var Campanha = $('#cbcampanha').val();
+        var Dano = $('#dano').val();
+
+        var url = "@Url.Action("Adiciona", "Itens")";
+        $.ajax({
+            url: url,
+            type: "POST",
+            data: { Cod_Item: Cod_Item, Descricao: Descricao, Valor_Min: Valor_Min, Valor_Max: Valor_Max, Up: Up, Bonus_Atk_Corpo: Bonus_Atk_Corpo, Bonus_Atk_Distanc: Bonus_Atk_Distanc, Decisivo: Decisivo, Critico: Critico, Resistencia: Resistencia, Peso: Peso, Ca: Ca, Raridade: Raridade, Tipo: Tipo, Pre_Requisito: Pre_Requisito, Penalidade: Penalidade, Duas_Maos: Duas_Maos, Municao: Municao, Descricao_Detalhada: Descricao_Detalhada, Ativo: Ativo, Campanha: Campanha, Dano: Dano },
+            success: successFunction,
+            error: errorFunction
+        });
+    }
+
+    $("#descricao").keyup(function () {
+        limite(this, 200);
+    });
+</script>

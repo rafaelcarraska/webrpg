@@ -50,13 +50,31 @@ namespace rpg.Dao
                 if (!string.IsNullOrEmpty(dt_classe.Rows[0]["Vantagens_Desvantagens"].ToString()))
                 {
                     _Classe.Vantagens_Desvantagens = new List<int>(Array.ConvertAll(dt_classe.Rows[0]["Vantagens_Desvantagens"].ToString().Split('_'), int.Parse));
-                }                
-                _Classe.Pericias = dt_classe.Rows[0]["Pericias"].ToString();
+                }
+                _Classe.Pericias = new List<int>(Array.ConvertAll(dt_classe.Rows[0]["Pericias"].ToString().Split('_'), int.Parse));
                 _Classe.Custo = Convert.ToInt32(dt_classe.Rows[0]["Custo"].ToString());
                 _Classe.Ativo = Convert.ToBoolean(dt_classe.Rows[0]["Ativo"].ToString());
             }
 
             return _Classe;
+        }
+
+        public List<Classe> Listar_Classes_dt_cb()
+        {
+            _conn = new Conexao();
+            List<Classe> list_Classe = new List<Classe>();
+
+            DataTable dt_Classe = _conn.dataTable("select cod_vantagem, descricao from Vantagens where ativo = 1 order by descricao", "VANTAGEM");
+            foreach (DataRow row in dt_Classe.Rows)
+            {
+                list_Classe.Add(new Classe
+                {
+                    Cod_Classe = Convert.ToInt32(row["cod_vantagem"].ToString()),
+                    Descricao = row["descricao"].ToString()
+                });
+            }
+
+            return list_Classe;
         }
 
     }

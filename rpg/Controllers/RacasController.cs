@@ -34,8 +34,8 @@ namespace rpg.Controllers
             }
             ViewBag.pagina = "Raças / Detalhes";
             RacaDao _RacaDao = new RacaDao();
-            Raca _Racas = _RacaDao.Listar_Raca(id);
-            return View(_Racas);
+            Raca _Raca = _RacaDao.Listar_Raca(id);
+            return View(_Raca);
         }
     }
 }

@@ -27,8 +27,8 @@ namespace rpg.Dao
         public void delete(int cod_log)
         {
             Conexao _conn = new Conexao();
-            string strupdate = "delete from log where cod_log = " + cod_log + "";
-            _conn.execute(strupdate);
+            string strdelete = "delete from log where cod_log = " + cod_log + "";
+            _conn.execute(strdelete);
         }
     }
 }

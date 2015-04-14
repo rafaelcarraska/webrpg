@@ -2,7 +2,6 @@
 @{
     Layout = "~/Views/Shared/_Grid.cshtml";
 }
-@Styles.Render("~/bundles/modalcss")
 
 <table id="tabelaGrid" cellpadding="0" cellspacing="0">
     <thead>
@@ -20,10 +19,10 @@
                 <td></td>
                 <td>@Ficha.Descricao</td>
                 <td>
-                    <a href="#" onclick="clickmodal(@Ficha.Cod_Ficha)">Editar</a>
+                    <a href="javascript: clickmodal(@Ficha.Cod_Ficha)">Editar</a>
                 </td>
                 <td>
-                    <a href="#" onclick="deletar(@Ficha.Cod_Ficha, '@Ficha.Descricao', this)">Deletar</a>
+                    <a href="javascript: deletar(@Ficha.Cod_Ficha, '@Ficha.Descricao', this)">Deletar</a>
                 </td>
             </tr>
         }
@@ -31,7 +30,7 @@
 </table>
 <div class="modal" id="modal" style="width: 800px; height: 500px;">
     <div class="fechar">
-        <a href="#" onclick="fecharmodal()">Fechar</a>
+        <a href="javascript: fecharmodal()">Fechar</a>
     </div>
     <div class="titulomodal" style=" margin-left:42%;">
         <p id="titulomodal" style=" margin-left: 20px;">Editar </p>
@@ -107,4 +106,13 @@
             $('table tbody tr:even').removeClass("zebraUm zebraDois").addClass('zebraDois');
         }
     }    
+
+    $("#Calc_HP").keyup(function () {
+        limite(this, 150);
+    });
+
+    $("#Calc_MP").keyup(function () {
+        limite(this, 150);
+    });
+
 </script>   

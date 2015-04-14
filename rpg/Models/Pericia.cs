@@ -16,7 +16,7 @@ namespace rpg.Models
 
         public int penalidade_peso { get; set; }
 
-        public String requisito_classe { get; set; }
+        public List<int> requisito_classe { get; set; }
 
         public bool Treinada { get; set; }
 

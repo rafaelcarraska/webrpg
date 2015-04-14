@@ -8,6 +8,11 @@
     width:200px;
     height:100px;
 }
+
+.modalsenha { 
+    display:none;     
+    background-color:white;
+}
 .fechar{
     float:right;
     padding-right:10px;

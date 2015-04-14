@@ -1,0 +1,150 @@
+﻿@model rpg.Models.Pericia
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@Scripts.Render("~/bundles/UIjquery")
+@Styles.Render("~/bundles/UI_css")
+
+@Styles.Render("~/bundles/formcss")
+@Styles.Render("~/bundles/gridcss")
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('table tbody tr:odd').addClass('zebraUm');
+        $('table tbody tr:even').addClass('zebraDois');
+    });
+
+</script>
+
+<div>
+    <div id="boxForm">
+        <div id="conteudo">
+            <form method="post">
+                <div class="fordescricao linha">
+                    <input type="hidden" name="Pericia.Cod_Pericia" value="@Model.Cod_Pericia" id="Cod_Pericia" />
+                    <label for="descricao">Descrição:</label>
+                    <input id="descricao" name="Pericia.Descricao" value="@Model.Descricao" required style="width:250px;" />
+                </div>
+                <div class="linha">
+                    <label for="peso">Penalidade por peso:</label>
+                    <input id="peso" class="numero" name="Pericia.penalidade_peso" value="@Model.penalidade_peso" required />
+                </div>  
+                <div class="linha">
+                    <label for="Cod_Atributo">Atributo base</label>
+                    <select id="Cod_Atributo" name="cbCod_Atributo">
+                        @foreach (var Atributo in ViewBag.Atributos)
+                        {
+                            <option value="@Atributo.Cod_Atributo">@Atributo.Descricao</option>
+                        }
+                    </select>
+                </div>              
+                <div class="linha">
+                    <div class="add_classes">
+                        <label for="preclasse">Pré Requisito Classe </label>
+                        <select id="preclasse" name="cbpreclasse">
+                            @foreach (var Classe in ViewBag.Classes)
+                            {
+                                <option value="@Classe.Cod_Classe">@Classe.Descricao</option>
+                            }
+                        </select>
+                        <input type="button" id="btnaddClasses" onclick="addclasses()" value="Adicionar" />
+                    </div>
+
+                    <div id="tree" class="tree_classes" style="width: 400px; height: 100px; float:left; margin-left:35px; margin-bottom:1px;">
+                        <ul id="ulclasses"></ul>
+                    </div>
+                </div>
+                <div class="linha">
+                    <input type="checkbox" checked="@Convert.ToBoolean(Model.Treinada) Model.Treinada" id="Treinada" name="Pericia.Treinada" /><span>Treinada</span>
+                </div>
+                <div class="linha">
+                    <label for="Caracteristicas">Caracteristicas Detalhada:</label>
+                    <textarea cols="106" rows="6" id="Caracteristicas" name="Pericia.Caracteristicas" style="display:inline-block; vertical-align:middle;">@Model.Caracteristicas</textarea>
+                </div>
+                <div class="linha">
+                    <label for="Campanha">Campanha</label>
+                    <select id="cbCampanha" name="cbCampanha">
+                        <option value="0">Global</option>
+                        @foreach (var Campanhas in ViewBag.Campanhas)
+                        {
+                            <option value="@Campanhas.Cod_Campanha">@Campanhas.Descricao</option>
+                        }
+                    </select>
+                </div>
+                <div class="linha">
+                    <input type="checkbox" checked="@Convert.ToBoolean(Model.Ativo) Model.Ativo" id="ativo" name="Pericia.Ativo" /><span>Ativo</span>
+                </div>
+
+                <div style="width: 80px; height: 100%;" class="divbtn">
+                    <input class="btnsalvar" id="btnsalvar" type="submit" value="Salvar" onclick="salvar()" style="margin-bottom: 25px;" />
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<script>
+
+    function addVantagens() {
+        var existe = 0;
+        $('#ulclasses li .codvantagem').each(function () {
+            if ($(this).val() == $("#cbpreclasse option:selected").val()) {
+                existe = 1;
+                return false;
+            }
+        });
+        if (existe == 0) {
+            $('#ulclasses').append('<li class="linha_li"><input class="codclasse" type="hidden" value="' + $("#cbpreclasse option:selected").val() + '" /> ' + $("#cbpreclasse option:selected").text() + '  <a href="javascript:deletarli(' + $("#cbpreclasse option:selected").val() + ', \'' + $("#cbpreclasse option:selected").text() + '\')">Remover</a></li>');
+        }
+        else {
+            alert("A Classe " + $("#cbpreclasse option:selected").text() + " já existe");
+        }
+    }
+
+    function deletarli(cod, descricao) {
+        if (confirm("A Classe " + descricao + " será excluido do sistema ")) {
+
+            $('#ulclasses li .codclasse').each(function () {
+                if ($(this).val() == cod) {
+                    $(this).parent().remove();
+                    return false;
+                }
+            });
+        }
+    }
+
+    function salvar() {
+        var cod_classe = $('#Cod_Classe').val();
+        var descricao = $('#descricao').val();
+        var custo = $('#Custo').val();
+
+        var atributos = '';
+        $('#tabelaGrid .linha_grid').each(function () {
+            atributos = atributos + $(this).find('.codatributo').val() + "_" + $(this).find('.vlrbonus').html() + ";";
+        });
+
+        var prerequisitovant = '';
+        $('#ulvantagens li .codvantagem').each(function () {
+            prerequisitovant = prerequisitovant + $(this).val() + "_";
+        });
+
+        var prerequisito = $('#cbpreatributo').val() + '_' + $('#prevlr').val();
+        var caracteristicas = $('#Caracteristicas').val();
+        var campanha = $('#cbCampanha').val();
+        var ativo = $('#ativo').prop('checked');
+
+        var url = "@Url.Action("Adiciona", "Vantagens")";
+        $.ajax({
+            url: url,
+            type: "POST",
+            data: { cod_vantagem: cod_vantagem, descricao: descricao, custo: custo, atributos: atributos, prerequisitovant: prerequisitovant, prerequisito: prerequisito, caracteristicas: caracteristicas, campanha: campanha, ativo: ativo },
+            beforeSend: beforeSendFunction,
+            success: successFunction,
+            error: errorFunction,
+            complete: completeFunction
+        });
+    }
+
+    $("#descricao").keyup(function () {
+        limite(this, 200);
+    });
+</script>

@@ -15,7 +15,6 @@ namespace rpg.Dao
     public class PerfilDao
     {
         Conexao _conn;
-        LogDao _LogDao;
 
         public List<Perfil> Listar_Perfil_dt(bool ativo)
         {

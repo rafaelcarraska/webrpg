@@ -4,8 +4,6 @@
 
     @Styles.Render("~/bundles/gridcss")
 
-    @Scripts.Render("~/bundles/modaljquery") 
-
 <script type="text/javascript">
     $(document).ready(function () {
         $('table tbody tr:odd').addClass('zebraUm');
@@ -20,7 +18,7 @@
             
             <div id="nav">
                 <div id="BotoesGrid" class="botoes">
-                    <a id="botaoNovo" class="botaoNovo" onclick="botaonovo()" href="#">Novo</a>
+                    <a id="botaoNovo" class="botaoNovo" href="javascript: botaonovo()" >Novo</a>
                 </div>
             </div>
             <div id="grid">                
