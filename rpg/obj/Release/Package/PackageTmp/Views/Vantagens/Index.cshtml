@@ -8,12 +8,14 @@
         <tr class="titulo">
             <th></th>
             <th id="col_fil_desc">Descrição</th>
+            <th id="col_fil_desc">Custo</th>
             <th></th>
             <th></th>
         </tr>
         <tr class="titulo">
             <th></th>
             <th><input type="text" id="txtColuna2" /></th>
+            <th><input type="text" id="txtColuna3" /></th>
             <th></th>
             <th></th>
         </tr>
@@ -23,7 +25,8 @@
         {
             <tr class="linha">
                 <td></td>
-                <td>@Vantagens.Descricao</td>
+                <td title="@Vantagens.Caracteristicas">@Vantagens.Descricao</td>
+                <td>@Vantagens.Custo.ToString()</td>
                 <td>
                     @Html.RouteLink("Editar", "Editar_Vantagem", new { id = Vantagens.Cod_Vantagem })
                 </td>

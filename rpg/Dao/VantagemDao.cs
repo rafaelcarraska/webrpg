@@ -20,13 +20,15 @@ namespace rpg.Dao
             _conn = new Conexao();
             List<Vantagem> list_Vantagens = new List<Vantagem>();
 
-            DataTable dt_Vantagem = _conn.dataTable("select cod_vantagem, descricao, ativo from Vantagens order by descricao", "VANTAGEM");
+            DataTable dt_Vantagem = _conn.dataTable("select cod_vantagem, descricao, Custo, Caracteristicas, ativo from Vantagens order by descricao", "VANTAGEM");
             foreach (DataRow row in dt_Vantagem.Rows)
             {
                 list_Vantagens.Add(new Vantagem
                 {
                     Cod_Vantagem = Convert.ToInt32(row["cod_vantagem"].ToString()),
                     Descricao = row["descricao"].ToString(),
+                    Custo = Convert.ToInt32(row["Custo"].ToString()),
+                    Caracteristicas = row["Caracteristicas"].ToString(),
                     Ativo = Convert.ToBoolean(row["ativo"].ToString())
                 });
             }

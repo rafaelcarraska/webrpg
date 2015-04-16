@@ -33,7 +33,7 @@ namespace rpg.Dao
             if (_conn.State == ConnectionState.Closed)
             {
                 _conn.Open();
-                using (SqlCommand cmd = new SqlCommand("SET DATEFORMAT dmy", _conn))
+                using (SqlCommand cmd = new SqlCommand("SET DATEFORMAT ymd", _conn))
                 {
                     cmd.ExecuteNonQuery();
                 }

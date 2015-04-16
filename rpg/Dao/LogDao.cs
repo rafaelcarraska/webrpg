@@ -20,14 +20,14 @@ namespace rpg.Dao
             Conexao _conn = new Conexao();
             Usuario _usuario = new Usuario();
             _usuario = SessionView.UsuarioSession;
-            string strInsert = "insert into log (datet, cod_usuario, tela, acao, obs) values('" + DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss") + "', " + _usuario.Cod_Usuario + ", '" + tela.Replace("'", "''") + "', '" + acao.Replace("'", "''") + "', '" + obs.Replace("'", "''") + "')";
+            string strInsert = "insert into log_h (datet, cod_usuario, tela, acao, obs) values('" + DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss") + "', " + _usuario.Cod_Usuario + ", '" + tela.Replace("'", "''") + "', '" + acao.Replace("'", "''") + "', '" + obs.Replace("'", "''") + "')";
             _conn.execute(strInsert);
         }
 
         public void delete(int cod_log)
         {
             Conexao _conn = new Conexao();
-            string strdelete = "delete from log where cod_log = " + cod_log + "";
+            string strdelete = "delete from log_h where cod_log = " + cod_log + "";
             _conn.execute(strdelete);
         }
     }

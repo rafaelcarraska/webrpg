@@ -47,11 +47,11 @@ namespace rpg.Controllers
             _row.Add("C");
             _row.Add("Comum");
             _tipo.Add(_row);
-            _row.Clear();
+            _row = new List<string>();
             _row.Add("A");
             _row.Add("Ataque");
             _tipo.Add(_row);
-            _row.Clear();
+            _row = new List<string>();
             _row.Add("D");
             _row.Add("Defesa");
             _tipo.Add(_row);

@@ -8,12 +8,16 @@
         <tr class="titulo">
             <th></th>
             <th id="col_fil_desc">Descrição</th>
+            <th id="col_fil_desc">Valor Min.</th>
+            <th id="col_fil_desc">Valor Max.</th>
             <th></th>
             <th></th>
         </tr>
         <tr class="titulo">
             <th></th>
             <th><input type="text" id="txtColuna2" /></th>
+            <th></th>
+            <th></th>
             <th></th>
             <th></th>
         </tr>
@@ -23,7 +27,9 @@
         {
             <tr class="linha">
                 <td></td>
-                <td>@Item.Descricao</td>
+                <td title="@Item.Descricao_Detalhada">@Item.Descricao</td>
+                <td>@Item.Valor_Min.ToString().Replace(".",",") P.O</td>
+                <td>@Item.Valor_Max.ToString().Replace(".", ",") P.O</td>
                 <td>
                     @Html.RouteLink("Editar", "Editar_Item", new { id = Item.Cod_Item })
                 </td>
