@@ -20,13 +20,14 @@ namespace rpg.Dao
             _conn = new Conexao();
             List<Pericia> list_Pericias = new List<Pericia>();
 
-            DataTable dt_Pericias = _conn.dataTable("select cod_pericia, descricao, ativo from pericias order by descricao", "PERICIA");
+            DataTable dt_Pericias = _conn.dataTable("select p.cod_pericia, p.descricao, a.descricao as Descricao_atributo, p.ativo from pericias as p, atributos as a where p.cod_atributo = a.cod_atributo order by descricao", "PERICIA");
             foreach (DataRow row in dt_Pericias.Rows)
             {
                 list_Pericias.Add(new Pericia
                 {
                     Cod_Pericia = Convert.ToInt32(row["Cod_Pericia"].ToString()),
                     Descricao = row["descricao"].ToString(),
+                    Descricao_atributo = row["Descricao_atributo"].ToString(),
                     Ativo = Convert.ToBoolean(row["ativo"].ToString())
                 });
             }
@@ -40,6 +41,24 @@ namespace rpg.Dao
             List<Pericia> list_Pericias = new List<Pericia>();
 
             DataTable dt_Pericia = _conn.dataTable("select cod_pericia, descricao from pericias where ativo = 1 order by descricao", "PERICIA");
+            foreach (DataRow row in dt_Pericia.Rows)
+            {
+                list_Pericias.Add(new Pericia
+                {
+                    Cod_Pericia = Convert.ToInt32(row["Cod_Pericia"].ToString()),
+                    Descricao = row["descricao"].ToString()
+                });
+            }
+
+            return list_Pericias;
+        }
+
+        public List<Pericia> Listar_Pericias_dt_cb_treinada()
+        {
+            _conn = new Conexao();
+            List<Pericia> list_Pericias = new List<Pericia>();
+
+            DataTable dt_Pericia = _conn.dataTable("select cod_pericia, descricao from pericias where ativo = 1 and treinada = 1 order by descricao", "PERICIA");
             foreach (DataRow row in dt_Pericia.Rows)
             {
                 list_Pericias.Add(new Pericia
@@ -83,16 +102,17 @@ namespace rpg.Dao
                 _conn = new Conexao();
                 _LogDao = new LogDao();
 
-                string strInsert = "insert into pericias (Descricao, Cod_Atributo, penalidade_peso, requisito_classe, Treinada, Caracteristicas, Campanha, Ativo) "
-                    + " values('" + pericia.Descricao.Replace("'", "''") + "', " + pericia.Cod_Atributo + ", " + pericia.penalidade_peso + ", '"
-                    + string.Join<int>("_", pericia.requisito_classe).Replace("'", "''") + "', '" + pericia.Treinada.ToString() + "', '" + pericia.Caracteristicas.Replace("'", "''") + "', "
-                    + pericia.Campanha + ", '" + pericia.Ativo.ToString() + "')";
+                string strInsert = "insert into pericias (Descricao, Cod_Atributo, Treinada, Caracteristicas, requisito_classe, Campanha, Ativo, penalidade_peso) "
+                    + " values('" + pericia.Descricao.Replace("'", "''") + "', " + pericia.Cod_Atributo + ", '" + pericia.Treinada.ToString()
+                    + "', '" + pericia.Caracteristicas.Replace("'", "''") + "', '"
+                    + string.Join<int>("_", pericia.requisito_classe).Replace("'", "''") + "',  "
+                    + pericia.Campanha + ", '" + pericia.Ativo.ToString() + "', "+ pericia.penalidade_peso +" )";
                 _conn.execute(strInsert);
                 _LogDao.insert("Pericia", "add", "");
             }
             catch (Exception)
             {
-                msg = "Erro ao adicionar a Vantagem ('" + pericia.Descricao + "')";
+                msg = "Erro ao adicionar a Pericia ('" + pericia.Descricao + "')";
             }
             return msg;
         }
@@ -105,9 +125,11 @@ namespace rpg.Dao
                 _conn = new Conexao();
                 _LogDao = new LogDao();
 
-                string strupdate = "update vantagens set Descricao = '" + pericia.Descricao.Replace("'", "''") + "', Cod_Atributo = " + pericia.Cod_Atributo
-                    + ", penalidade_peso = " + pericia.penalidade_peso + ", requisito_classe = '" + string.Join<int>("_", pericia.requisito_classe).Replace("'", "''")
-                    + "', Treinada = '" + pericia.Treinada.ToString() + "', Caracteristicas = '" + pericia.Caracteristicas.Replace("'", "''") + "', Campanha = " + pericia.Campanha + ", Ativo = '" + pericia.Ativo.ToString() + "' where cod_peria = "+pericia.Cod_Pericia+" ";
+                string strupdate = "update pericias set Descricao = '" + pericia.Descricao.Replace("'", "''") + "', Cod_Atributo = " + pericia.Cod_Atributo 
+                    +", Treinada = '" + pericia.Treinada.ToString() +"', Caracteristicas = '" + pericia.Caracteristicas +"', Campanha = " + pericia.Campanha 
+                    +", Ativo = '" + pericia.Ativo.ToString() +"', penalidade_peso = " + pericia.penalidade_peso 
+                    +", requisito_classe = '" + string.Join<int>("_", pericia.requisito_classe).Replace("'", "''") + "' "
+                +"where cod_pericia = "+pericia.Cod_Pericia+" ";
                 _conn.execute(strupdate);
                 _LogDao.insert("Pericia", "up", "cod_Pericia = " + pericia.Cod_Pericia.ToString());
             }

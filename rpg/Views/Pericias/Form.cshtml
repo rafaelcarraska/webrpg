@@ -34,28 +34,34 @@
                     <select id="Cod_Atributo" name="cbCod_Atributo">
                         @foreach (var Atributo in ViewBag.Atributos)
                         {
-                            <option value="@Atributo.Cod_Atributo">@Atributo.Descricao</option>
+                            <option value="@Atributo.Cod_Atributo" selected="@Atributo.Cod_Atributo.Equals(Model.Cod_Atributo)">@Atributo.Descricao</option>
                         }
                     </select>
                 </div>              
                 <div class="linha">
                     <div class="add_classes">
                         <label for="preclasse">Pré Requisito Classe </label>
-                        <select id="preclasse" name="cbpreclasse">
-                            @foreach (var Classe in ViewBag.Classes)
+                        <select id="cbpreclasse" name="cbpreclasse">
+                            @foreach (var Classes in ViewBag.Classes)
                             {
-                                <option value="@Classe.Cod_Classe">@Classe.Descricao</option>
+                                <option value="@Classes.Cod_Classe">@Classes.Descricao</option>
                             }
                         </select>
-                        <input type="button" id="btnaddClasses" onclick="addclasses()" value="Adicionar" />
+                        <input type="button" id="btnaddClasses" onclick="addClasses()" value="Adicionar" />
                     </div>
 
                     <div id="tree" class="tree_classes" style="width: 400px; height: 100px; float:left; margin-left:35px; margin-bottom:1px;">
-                        <ul id="ulclasses"></ul>
+                        <ul id="ulclasses">
+                            @foreach (var clasload in ViewBag.classesload)
+                            {
+                                List<string> v_l = new List<string>(clasload.Split('_'));
+                                <li class="linha_li"><input class="codclasse" type="hidden" value="@v_l[0]" /> @v_l[1]  <a href="javascript:deletarli(@v_l[0], '@v_l[1]')">Remover</a></li>
+                            }
+                        </ul>
                     </div>
                 </div>
                 <div class="linha">
-                    <input type="checkbox" checked="@Convert.ToBoolean(Model.Treinada) Model.Treinada" id="Treinada" name="Pericia.Treinada" /><span>Treinada</span>
+                    <input type="checkbox" checked="@Model.Treinada" id="Treinada" name="Pericia.Treinada" /><span>Treinada</span>
                 </div>
                 <div class="linha">
                     <label for="Caracteristicas">Caracteristicas Detalhada:</label>
@@ -72,7 +78,7 @@
                     </select>
                 </div>
                 <div class="linha">
-                    <input type="checkbox" checked="@Convert.ToBoolean(Model.Ativo) Model.Ativo" id="ativo" name="Pericia.Ativo" /><span>Ativo</span>
+                    <input type="checkbox" checked="@Model.Ativo" id="ativo" name="Pericia.Ativo" /><span>Ativo</span>
                 </div>
 
                 <div style="width: 80px; height: 100%;" class="divbtn">
@@ -84,9 +90,9 @@
 </div>
 <script>
 
-    function addVantagens() {
+    function addClasses() {
         var existe = 0;
-        $('#ulclasses li .codvantagem').each(function () {
+        $('#ulclasses li .codclasse').each(function () {
             if ($(this).val() == $("#cbpreclasse option:selected").val()) {
                 existe = 1;
                 return false;
@@ -113,30 +119,24 @@
     }
 
     function salvar() {
-        var cod_classe = $('#Cod_Classe').val();
-        var descricao = $('#descricao').val();
-        var custo = $('#Custo').val();
-
-        var atributos = '';
-        $('#tabelaGrid .linha_grid').each(function () {
-            atributos = atributos + $(this).find('.codatributo').val() + "_" + $(this).find('.vlrbonus').html() + ";";
+        var Cod_Pericia = $('#Cod_Pericia').val();
+        var Descricao = $('#descricao').val();
+        var Cod_Atributo = $('#Cod_Atributo').val();
+        var penalidade_peso = $('#peso').val();
+        var requisito_classe = '';
+        $('#ulclasses li .codclasse').each(function () {
+            requisito_classe = requisito_classe + $(this).val() + "_";
         });
+        var Treinada = $('#Treinada').prop('checked');
+        var Caracteristicas = $('#Caracteristicas').val();
+        var Campanha = $('#cbCampanha').val();
+        var Ativo = $('#ativo').prop('checked');
 
-        var prerequisitovant = '';
-        $('#ulvantagens li .codvantagem').each(function () {
-            prerequisitovant = prerequisitovant + $(this).val() + "_";
-        });
-
-        var prerequisito = $('#cbpreatributo').val() + '_' + $('#prevlr').val();
-        var caracteristicas = $('#Caracteristicas').val();
-        var campanha = $('#cbCampanha').val();
-        var ativo = $('#ativo').prop('checked');
-
-        var url = "@Url.Action("Adiciona", "Vantagens")";
+        var url = "@Url.Action("Adiciona", "Pericias")";
         $.ajax({
             url: url,
             type: "POST",
-            data: { cod_vantagem: cod_vantagem, descricao: descricao, custo: custo, atributos: atributos, prerequisitovant: prerequisitovant, prerequisito: prerequisito, caracteristicas: caracteristicas, campanha: campanha, ativo: ativo },
+            data: { Cod_Pericia: Cod_Pericia, Descricao: Descricao, Cod_Atributo: Cod_Atributo, penalidade_peso: penalidade_peso, requisito_classe: requisito_classe, Treinada: Treinada, Caracteristicas: Caracteristicas, Campanha: Campanha, Ativo: Ativo },
             beforeSend: beforeSendFunction,
             success: successFunction,
             error: errorFunction,

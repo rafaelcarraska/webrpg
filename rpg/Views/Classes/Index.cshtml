@@ -25,7 +25,7 @@
                 <td></td>
                 <td>@Classes.Descricao</td>
                 <td>
-                    @Html.RouteLink("Editar", "Editar_Vantagem", new { id = Classes.Cod_Classe })
+                    @Html.RouteLink("Editar", "Editar_Classe", new { id = Classes.Cod_Classe })
                 </td>
                 <td>
                     <a href="javascript: deletar(@Classes.Cod_Classe, '@Classes.Descricao', this)">Deletar</a>
@@ -78,7 +78,7 @@
     }
 
     function botaonovo() {
-        window.location.href = 'Classse/0';
+        window.location.href = 'Classe/0';
     }
 
 </script>   

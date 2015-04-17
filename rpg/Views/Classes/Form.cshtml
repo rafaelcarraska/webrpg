@@ -21,7 +21,7 @@
         <div id="conteudo">
             <form method="post">
                 <div class="fordescricao linha">
-                    <input type="hidden" name="Vantagem.Cod_Vantagem" value="@Model.Cod_Vantagem" id="Cod_Vantagem" />
+                    <input type="hidden" name="Vantagem.Cod_Classe" value="@Model.Cod_Classe" id="Cod_Vantagem" />
                     <label for="descricao">Descrição:</label>
                     <input id="descricao" name="Vantagem.Descricao" value="@Model.Descricao" required style="width:250px;" />
                 </div>
@@ -30,19 +30,20 @@
                     <input id="Custo" class="numero" name="Vantagem.Custo" value="@Model.Custo" required />
                 </div>
                 <div class="linha">
-                    <label for="Atributo">Atributo Bonus</label>
-                    <select id="cbAtributobonus" name="cbAtributobonus">
-                        @foreach (var Atributos in ViewBag.Atributos)
+                    <label for="Pericia">Pericia Bonus</label>
+                    <select id="cbPericiabonus" name="cbPericiabonus">
+                        @foreach (var Pericias in ViewBag.Pericias)
                         {
-                            <option value="@Atributos.Cod_Atributo">@Atributos.Descricao</option>
+                            <option value="@Pericias.Cod_Pericia">@Pericias.Descricao</option>
                         }
                     </select>
                     <label for="vlrbonus">Valor do bonus:</label>
-                    <input id="vlrbonus" class="numero" name="Vantagem.vlrbonus" value="" />
-                    <input type="button" id="btnaddatributo" class="btnadd" value="Adicionar" onclick="addatributo()" />
+                    <input id="vlrbonus" class="numero" name="Classes.vlrbonus" value="" />
+                    <input type="button" id="btnaddpericia" class="btnadd" value="Adicionar" onclick="addpericia()" />
                 </div>
+
                 <div class="linha">
-                    <div id="boxGrid" class="grid_bonusatributo" style=" clear:both !important; margin-top: 8px; margin-left:0px; width:290px;">
+                    <div id="boxGrid" class="grid_bonuspericia" style=" clear:both !important; margin-top: 8px; margin-left:0px; width:380px;">
                         <div id="nav">
                             <div id="BotoesGrid" class="botoes">
                             </div>
@@ -52,21 +53,33 @@
                                 <thead>
                                     <tr class="titulo">
                                         <th></th>
-                                        <th>Atributos</th>
+                                        <th>Pericia</th>
                                         <th>Bonus</th>
                                         <th></th>
                                     </tr>
                                 </thead>
-                                <tbody></tbody>
+                                <tbody>
+                                    @foreach (var bonus_pericia in ViewBag.periciasload)
+                                    {
+                                        List<string> b_A = new List<string>(bonus_pericia.Split('_'));
+                                        <tr class="linha_grid">
+                                            <td><input class="codpericia" type="hidden" value="@b_A[0]" /></td>
+                                            <td class="descpericia">@b_A[2]</td>
+                                            <td class="vlrbonus">@b_A[1]</td>
+                                            <td><a href="javascript:deletar(@b_A[0], '@b_A[1]')">Deletar</a></td>
+                                        </tr>
+                                    }
+                                </tbody>
                             </table>
                         </div>
                         <div id="boxPaginacao">
                         </div>
                     </div>
                 </div>
+
                 <div class="linha">
                     <div class="add_vantagens">
-                        <label for="prevantagem">Pré Requisito Vantagem </label>
+                        <label for="prevantagem">Vantagem </label>
                         <select id="cbprevantagem" name="cbprevantagem">
                             @foreach (var Vantagens in ViewBag.Vantagens)
                             {
@@ -77,23 +90,19 @@
                     </div>
 
                     <div id="tree" class="tree_vantagens" style="width: 400px; height: 100px; float:left; margin-left:35px; margin-bottom:1px;">
-                        <ul id="ulvantagens"></ul>
+                        <ul id="ulvantagens">
+                            @foreach (var vantload in ViewBag.vantagensload)
+                            {
+                                List<string> v_l = new List<string>(vantload.Split('_'));
+                                <li class="linha_li"><input class="codvantagem" type="hidden" value="@v_l[0]" /> @v_l[1]  <a href="javascript:deletarli(@v_l[0], '@v_l[1]')">Remover</a></li>
+                            }
+                        </ul>     
                     </div>
                 </div>
-                <div class="linha">
-                    <label for="preatributo">Pré Requisito</label>
-                    <select id="cbpreatributo" name="cbpreatributo">
-                        @foreach (var Atributos in ViewBag.Atributos)
-                        {
-                            <option value="@Atributos.Cod_Atributo">@Atributos.Descricao</option>
-                        }
-                    </select>
-                    <label for="prevlr">Valor:</label>
-                    <input id="prevlr" class="numero" name="Vantagem.prevlr" value="@Model.Custo" />
-                </div>
+                              
                 <div class="linha">
                     <label for="Caracteristicas">Caracteristicas Detalhada:</label>
-                    <textarea cols="106" rows="6" id="Caracteristicas" name="Vantagem.Caracteristicas" style="display:inline-block; vertical-align:middle;">@Model.Caracteristicas</textarea>
+                    <textarea cols="106" rows="6" id="Caracteristicas" name="Vantagem.Caracteristicas" style="display:inline-block; vertical-align:middle;">@Model.Descricao_Detalhada</textarea>
                 </div>
                 <div class="linha">
                     <label for="Campanha">Campanha</label>
@@ -117,25 +126,24 @@
     </div>
 </div>
 <script>
-    function addatributo() {
+    function addpericia() {
         var existe = 0;
-        $('#tabelaGrid .codatributo').each(function () {
-            if ($(this).val() == $("#cbAtributobonus option:selected").val()) {
+        $('#tabelaGrid .codpericia').each(function () {
+            if ($(this).val() == $("#cbPericiabonus option:selected").val()) {
                 existe = 1;
                 return false;
             }
         });
         if (existe == 0) {
             if (isNumber($("#vlrbonus").val())) {
-                $('#tabelaGrid').append('<tr class="linha_grid"><td><input class="codatributo" type="hidden" value="' + $("#cbAtributobonus option:selected").val() + '" /></td><td class="descatributo">' + $("#cbAtributobonus option:selected").text() + '</td><td class="vlrbonus">' + $("#vlrbonus").val() + '</td><td><a href="javascript:deletar(' + $("#cbAtributobonus option:selected").val() + ', \'' + $("#cbAtributobonus option:selected").text() + '\')">Deletar</a></td></tr>');
-                //$("#cbAtributobonus option:selected").remove();
+                $('#tabelaGrid').append('<tr class="linha_grid"><td><input class="codpericia" type="hidden" value="' + $("#cbPericiabonus option:selected").val() + '" /></td><td class="descpericia">' + $("#cbPericiabonus option:selected").text() + '</td><td class="vlrbonus">' + $("#vlrbonus").val() + '</td><td><a href="javascript:deletar(' + $("#cbPericiabonus option:selected").val() + ', \'' + $("#cbPericiabonus option:selected").text() + '\')">Deletar</a></td></tr>');
             }
             else {
                 alert("valor do bonus apenas numerico");
             }
         }
         else {
-            alert("O Atributo " + $("#cbAtributobonus option:selected").text() + " já existe");
+            alert("A Pericia " + $("#cbPericiabonus option:selected").text() + " já existe");
         }
     }
 
@@ -149,33 +157,30 @@
         });
         if (existe == 0) {
             $('#ulvantagens').append('<li class="linha_li"><input class="codvantagem" type="hidden" value="' + $("#cbprevantagem option:selected").val() + '" /> ' + $("#cbprevantagem option:selected").text() + '  <a href="javascript:deletarli(' + $("#cbprevantagem option:selected").val() + ', \'' + $("#cbprevantagem option:selected").text() + '\')">Remover</a></li>');
-            //$("#cbprevantagem option:selected").remove();
         }
         else {
             alert("A Vantagem " + $("#cbprevantagem option:selected").text() + " já existe");
         }
     }
 
-    function deletar(cod, descricao) {
-        if (confirm("O Atributo " + descricao + " será excluido do sistema ")) {
+    function deletarli(cod, descricao) {
+        if (confirm("A Vantagem " + descricao + " será excluida da classe ")) {
 
-            $('#tabelaGrid .codatributo').each(function () {
+            $('#ulvantagens li .codvantagem').each(function () {
                 if ($(this).val() == cod) {
-                    $(this).parent().parent().remove();
-                    //$("#cbAtributobonus").append($('<option></option>').val(cod).html(descricao));
+                    $(this).parent().remove();
                     return false;
                 }
             });
         }
     }
 
-    function deletarli(cod, descricao) {
-        if (confirm("A Vantagem " + descricao + " será excluido do sistema ")) {
+    function deletar(cod, descricao) {
+        if (confirm("A Pericia " + descricao + " será excluida da classe ")) {
 
-            $('#ulvantagens li .codvantagem').each(function () {
+            $('#tabelaGrid .codpericia').each(function () {
                 if ($(this).val() == cod) {
-                    $(this).parent().remove();
-                    //$("#cbprevantagem").append($('<option></option>').val(cod).html(descricao));
+                    $(this).parent().parent().remove();
                     return false;
                 }
             });
@@ -183,34 +188,31 @@
     }
 
     function salvar() {
-        var cod_vantagem = $('#Cod_Vantagem').val();
-        var descricao = $('#descricao').val();
-        var custo = $('#Custo').val();
+        var Cod_Classe = $('#Cod_Vantagem').val();
+        var Descricao = $('#descricao').val();
+        var Custo = $('#Custo').val();
 
-        var atributos = '';
+        var Pericias = '';
         $('#tabelaGrid .linha_grid').each(function () {
-            atributos = atributos + $(this).find('.codatributo').val() + "_" + $(this).find('.vlrbonus').html() + ";";
+            Pericias = Pericias + $(this).find('.codpericia').val() + "_" + $(this).find('.vlrbonus').html() + ";";
         });
 
-        var prerequisitovant = '';
+        var Vantagens_Desvantagens = '';
         $('#ulvantagens li .codvantagem').each(function () {
-            prerequisitovant = prerequisitovant + $(this).val() + "_";
+            Vantagens_Desvantagens = Vantagens_Desvantagens + $(this).val() + "_";
         });
 
-        var prerequisito = $('#cbpreatributo').val() + '_' + $('#prevlr').val();
-        var caracteristicas = $('#Caracteristicas').val();
-        var campanha = $('#cbCampanha').val();
-        var ativo = $('#ativo').prop('checked');
+        var Descricao_Detalhada = $('#Caracteristicas').val();
+        var Campanha = $('#cbCampanha').val();
+        var Ativo = $('#ativo').prop('checked');
 
-        var url = "@Url.Action("Adiciona", "Vantagens")";
+        var url = "@Url.Action("Adiciona", "Classes")";
         $.ajax({
             url: url,
             type: "POST",
-            data: { cod_vantagem: cod_vantagem, descricao: descricao, custo: custo, atributos: atributos, prerequisitovant: prerequisitovant, prerequisito: prerequisito, caracteristicas: caracteristicas, campanha: campanha, ativo: ativo },
-            beforeSend: beforeSendFunction,
+            data: { Cod_Classe: Cod_Classe, Descricao: Descricao, Custo: Custo, Pericias: Pericias, Vantagens_Desvantagens: Vantagens_Desvantagens, Descricao_Detalhada: Descricao_Detalhada, Campanha: Campanha, Ativo: Ativo },
             success: successFunction,
-            error: errorFunction,
-            complete: completeFunction
+            error: errorFunction
         });
     }
 

@@ -66,6 +66,11 @@ namespace rpg.Controllers
                     return RedirectToAction("Index", "Itens");
                 }                
             }
+            else
+            {
+                _Item.Penalidade = "0";
+                _Item.Ativo = true;
+            }
 
             List<string> vantagensload = new List<string>();
             if (_Item.Pre_Requisito != null)
@@ -125,7 +130,7 @@ namespace rpg.Controllers
                 ItemDao _ItemDao = new ItemDao();
                 if (_Item.Cod_Item == 0)
                 {
-                    if (verifica_acesso("Itens", "Alterar"))
+                    if (verifica_acesso("Itens", "Novo"))
                     {
                         msg = _ItemDao.Insert(_Item);
                     }

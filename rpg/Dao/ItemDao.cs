@@ -20,9 +20,24 @@ namespace rpg.Dao
             _conn = new Conexao();
             List<Item> list_Itens = new List<Item>();
 
-            DataTable dt_Item = _conn.dataTable("select Cod_Item, Descricao, Valor_Min, Valor_Max, Descricao_Detalhada, Ativo from Itens order by descricao", "ITEM");
+            DataTable dt_Item = _conn.dataTable("select Cod_Item, Descricao, Valor_Min, Valor_Max, Descricao_Detalhada, tipo, Ativo from Itens order by descricao", "ITEM");
             foreach (DataRow row in dt_Item.Rows)
             {
+                string tipo = row["Tipo"].ToString();
+                switch (tipo)
+                {
+                    case "D":
+                        tipo = "Defesa";
+                        break;
+                    case "A":
+                        tipo = "Ataque";
+                        break;
+                    case "C":
+                        tipo = "Comum";
+                        break;
+                    default:
+                        break;
+                }
                 list_Itens.Add(new Item
                 {
                     Cod_Item = Convert.ToInt32(row["Cod_Item"].ToString()),
@@ -30,6 +45,7 @@ namespace rpg.Dao
                     Valor_Min = Convert.ToDecimal(row["Valor_Min"].ToString()),
                     Valor_Max = Convert.ToDecimal(row["Valor_Max"].ToString()),
                     Descricao_Detalhada = row["Descricao_Detalhada"].ToString(),
+                    Tipo = tipo,
                     Ativo = Convert.ToBoolean(row["Ativo"].ToString())
                 });
             }

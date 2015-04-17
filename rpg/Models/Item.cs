@@ -24,7 +24,7 @@ namespace rpg.Models
         public int Raridade { get; set; }
         public string Tipo { get; set; }
         public List<int> Pre_Requisito { get; set; }
-        public String  Penalidade { get; set; }
+        public string  Penalidade { get; set; }
         public bool Duas_Maos { get; set; }
         public bool Municao { get; set; }
         public String Descricao_Detalhada { get; set; }

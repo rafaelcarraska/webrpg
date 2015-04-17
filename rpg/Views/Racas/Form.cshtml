@@ -16,8 +16,40 @@
                     <input id="descricao" name="Raca.Descricao" value="@Model.Descricao" required />
                 </div>
                 <div class="linha">
+                    <div class="add_vantagens">
+                        <label for="prevantagem">Vantagem / Desvantagens</label>
+                        <select id="cbprevantagem" name="cbprevantagem">
+                            @foreach (var Vantagens in ViewBag.Vantagens)
+                            {
+                                <option value="@Vantagens.Cod_Vantagem">@Vantagens.Descricao</option>
+                            }
+                        </select>
+                        <input type="button" id="btnaddVantagens" onclick="addVantagens()" value="Adicionar" />
+                    </div>
+
+                    <div id="tree" class="tree_vantagens" style="width: 400px; height: 100px; float:left; margin-left:35px; margin-bottom:1px;">
+                        <ul id="ulvantagens">
+                            @foreach (var vantload in ViewBag.vantagensload)
+                            {
+                                List<string> v_l = new List<string>(vantload.Split('_'));
+                                <li class="linha_li"><input class="codvantagem" type="hidden" value="@v_l[0]" /> @v_l[1]  <a href="javascript:deletarli(@v_l[0], '@v_l[1]')">Remover</a></li>
+                            }
+                        </ul>
+                    </div>
+                </div>
+                <div class="linha">
                     <label for="descricaodetalhada">Descrição Detalhada:</label>
                     <textarea cols="40" rows="5" id="Descricao_Detalhada" name="Raca.Descricao_Detalhada">@Model.Descricao_Detalhada</textarea>
+                </div>
+                <div class="linha">
+                    <label for="Campanha">Campanha</label>
+                    <select id="cbCampanha" name="cbCampanha">
+                        <option value="0">Global</option>
+                        @foreach (var Campanhas in ViewBag.Campanhas)
+                        {
+                            <option value="@Campanhas.Cod_Campanha" selected="@Campanhas.Cod_Campanha.Equals(Model.Campanha)">@Campanhas.Descricao</option>
+                        }
+                    </select>
                 </div>
                 <div class="linha">
                     <input type="checkbox" value="ativo" id="ativo" name="Raca.Ativo" /><span>Ativo</span>

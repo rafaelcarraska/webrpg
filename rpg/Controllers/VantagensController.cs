@@ -97,6 +97,10 @@ namespace rpg.Controllers
                 }
                 
             }
+            else
+            {
+                _Vantagens.Ativo = true;
+            }
             ViewBag.atributosload = atributosload;
             ViewBag.vantagensload = vantagensload;
             return View(_Vantagens);
@@ -126,7 +130,7 @@ namespace rpg.Controllers
                 VantagemDao _VantagemDao = new VantagemDao();
                 if (_vantagem.Cod_Vantagem == 0)
 	            {
-                    if (verifica_acesso("Vantagens", "Alterar"))
+                    if (verifica_acesso("Vantagens", "Novo"))
                     {
                         msg = _VantagemDao.Insert(_vantagem);
                     }

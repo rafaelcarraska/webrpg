@@ -12,6 +12,8 @@ namespace rpg.Models
 
         public String Descricao { get; set; }
 
+        public String Descricao_atributo { get; set; }
+
         public int Cod_Atributo { get; set; }
 
         public int penalidade_peso { get; set; }

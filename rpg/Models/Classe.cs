@@ -18,7 +18,7 @@ namespace rpg.Models
 
         public IList<int> Vantagens_Desvantagens { get; set; }
 
-        public IList<int> Pericias { get; set; }
+        public IList<string> Pericias { get; set; }
 
         public int Custo { get; set; }
 

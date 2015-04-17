@@ -38,7 +38,6 @@ namespace rpg.Controllers
                 TempData["notice"] = "erro";
                 return RedirectToAction("Index");
             }
-
         }
     }
 }
