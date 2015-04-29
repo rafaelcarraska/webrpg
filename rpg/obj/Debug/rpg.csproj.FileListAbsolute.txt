@@ -105,6 +105,6 @@ C:\Users\Rafael.mac\Documents\Visual Studio 2013\Projects\webrpg\rpg\rpg\bin\Mic
 C:\Users\Rafael.mac\Documents\Visual Studio 2013\Projects\webrpg\rpg\rpg\bin\Microsoft.Owin.Security.Google.xml
 C:\Users\Rafael.mac\Documents\Visual Studio 2013\Projects\webrpg\rpg\rpg\bin\Microsoft.Owin.Security.Twitter.xml
 C:\Users\Rafael.mac\Documents\Visual Studio 2013\Projects\webrpg\rpg\rpg\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
-C:\Users\Rafael.mac\Documents\Visual Studio 2013\Projects\webrpg\rpg\rpg\obj\Debug\rpg.csprojResolveAssemblyReference.cache
 C:\Users\Rafael.mac\Documents\Visual Studio 2013\Projects\webrpg\rpg\rpg\obj\Debug\rpg.dll
 C:\Users\Rafael.mac\Documents\Visual Studio 2013\Projects\webrpg\rpg\rpg\obj\Debug\rpg.pdb
+C:\Users\Rafael.mac\Documents\Visual Studio 2013\Projects\webrpg\rpg\rpg\obj\Debug\rpg.csprojResolveAssemblyReference.cache

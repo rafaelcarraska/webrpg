@@ -44,3 +44,44 @@
     margin-bottom:2px;
     margin-left:-25px;
 }
+
+
+table#tabelaGrida {
+  width:100%;
+}
+table#tabelaGrida tr td {
+  font-size:11px;
+  padding:3px 5px;
+}
+table#tabelaGrida tr th {
+  font-size:11px;
+  padding:3px 5px;
+  text-align: left;
+}
+table#tabelaGrida tr.titulo td {
+  background-color:#C6CFF7;
+  font-size:11px;
+  padding:3px 0;
+}
+table#tabelaGrida tr.titulo th {
+  background-color:#C6CFF7;
+  font-size:11px;
+  padding:3px 0;  
+  text-align: left;
+}
+table#tabelaGrida tr td.funcoes {
+  text-align:right;
+}
+table#tabelaGrid tr td.funcoes a {
+  color:#DD1708;
+}
+table#tabelaGrida tr td.funcoes a:hover {
+  color:#DD1708;
+  text-decoration:underline;
+}
+table#tabelaGrida tr td.valor {
+  text-align:right;
+}
+table#tabelaGrida tr td.check {
+  width:10px;
+}

@@ -1,4 +1,4 @@
-﻿@model IList<rpg.Models.Campanha>
+﻿@model IList<rpg.Models.Shop>
 @{
     Layout = "~/Views/Shared/_Grid.cshtml";
 }
@@ -13,41 +13,39 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (var Campanha in Model)
+        @foreach (var Shop in Model)
         {
             <tr class="linha">
-                <td><input class="codcampanha" type="hidden" value="@Campanha.Cod_Campanha" /></td>
-                <td>@Campanha.Descricao</td>
+                <td><input class="codloja" type="hidden" value="@Shop.Cod_Shop" /></td>
+                <td>@Shop.Descricao</td>
                 <td>
-                    <a href="javascript: clickmodal(@Campanha.Cod_Ficha)">Editar</a>
+                    <a href="javascript: clickmodal(@Shop.Cod_Shop, '@Shop.Descricao')">Editar</a>
                 </td>
                 <td>
-                    <a href="javascript: deletar(@Campanha.Cod_Ficha, '@Campanha.Descricao')">Deletar</a>
+                    <a href="javascript: deletar(@Shop.Cod_Shop, '@Shop.Descricao')">Deletar</a>
                 </td>
             </tr>
         }
     </tbody>
 </table>
-<div class="modal" id="modal" style="width: 500px; height: 200px;">
+<div class="modal" id="modal" style="width: 800px; height: 500px;">
     <div class="fechar">
         <a href="javascript: fecharmodal()">Fechar</a>
     </div>
-    <div class="titulomodal" style=" margin-left:33%;">
+    <div class="titulomodal" style=" margin-left:42%;">
         <p id="titulomodal" style=" margin-left: 20px;">Editar </p>
     </div>
-    <form method="post">
-        <div class="modalform" style="width: 400px; height: 100%; float:left; margin-top:10px;">
+    <form id="form" method="post">
+        <div class="modalform" style="width: 700px; height: 100%; float:left; margin-top:10px;">
             <div class="fordescricao linha">
-                <input type="hidden" name="Atributos.Cod_Atributo" value="0" id="cod_atributo" />
+                <input type="hidden" name="Ficha.Cod_Ficha" value="0" id="cod_ficha" />
                 <label for="descricao">Descrição:</label>
-                <input id="descricao" name="Atributos.Descricao" required />
+                <input id="descricao" name="Ficha.Descricao" required />
             </div>
-            <div class="linha">
-                <input type="checkbox" value="ativo" id="ativo" name="Atributos.Ativo" /><span>Ativo</span>
-            </div>
+            
         </div>
         <div style="width: 80px; height: 100%;" class="divbtn">
-            <input class="btnsalvar" id="btnsalvar" type="button" value="Salvar" onclick="salvar()" style="margin-top: 125px;" />
+            <input class="btnsalvar" id="btnsalvar" type="button" value="Salvar" onclick="salvar()" style="margin-top: 425px;" />
         </div>
     </form>
 </div>
@@ -56,9 +54,12 @@
     <p class="textjs">Aguarde</p>
 </div>
 <script>
-    function clickmodal(id) {
-        if (id != 0) {
-            $('#titulomodal').html("Editar Campanha");
+    function clickmodal(cod_ficha, descricao) {
+        if (cod_ficha != 0) {
+            $('#titulomodal').html("Editar Loja");
+            $('#descricao').val(descricao);
+
+            
         }
         $('.modal').bPopup({
             modalClose: false
@@ -66,14 +67,14 @@
     }
 
     function botaonovo() {
-        $('#titulomodal').html("Nova Campanha");
+        $('#titulomodal').html("Nova Loja");
         clickmodal(0);
     }
 
     function deletar(id, descricao) {
-        if (confirm("A Campanha " + descricao + " seá excluida do sistema ")) {
+        if (confirm("A Loja " + descricao + " seá excluida do sistema ")) {
             
-            $('#tabelaGrid .codcampanha').each(function () {
+            $('#tabelaGrid .codloja').each(function () {
                 if ($(this).val() == id) {
                     $(this).parent().parent().remove();
                     return false;

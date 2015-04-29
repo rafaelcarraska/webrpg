@@ -24,14 +24,14 @@
         @foreach (var Vantagens in Model)
         {
             <tr class="linha">
-                <td></td>
+                <td><input class="codvantagem" type="hidden" value="@Vantagens.Cod_Vantagem" /></td>
                 <td title="@Vantagens.Caracteristicas">@Vantagens.Descricao</td>
                 <td>@Vantagens.Custo.ToString()</td>
                 <td>
                     @Html.RouteLink("Editar", "Editar_Vantagem", new { id = Vantagens.Cod_Vantagem })
                 </td>
                 <td>
-                    <a href="javascript: deletar(@Vantagens.Cod_Vantagem, '@Vantagens.Descricao', this)">Deletar</a>
+                    <a href="javascript: deletar(@Vantagens.Cod_Vantagem, '@Vantagens.Descricao')">Deletar</a>
                 </td>
             </tr>
         }
@@ -60,10 +60,16 @@
     });
        
 
-    function deletar(cod_vantagem, descricao, botao) {
+    function deletar(cod_vantagem, descricao) {
         if (confirm("A Vantagem " + descricao +" será excluida do sistema ")) {
-            var par = $(botao).parent().parent()
-            par.remove();
+            
+            $('#tabelaGrid .codvantagem').each(function () {
+                if ($(this).val() == cod_vantagem) {
+                    $(this).parent().parent().remove();
+                    return false;
+                }
+            });
+
             $('table tbody tr:odd').removeClass("zebraUm zebraDois").addClass('zebraUm');
             $('table tbody tr:even').removeClass("zebraUm zebraDois").addClass('zebraDois');
 

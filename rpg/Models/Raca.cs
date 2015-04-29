@@ -16,21 +16,29 @@ namespace rpg.Models
 
         public int Campanha { get; set; } //admin pode cria raca global (campanha 0) mestre tem q escolher a campanha (dele)
 
-        public String Vantagens_Desvantagens { get; set; }
+        public IList<int> Vantagens_Desvantagens { get; set; }
+
+        public List<string> Bonus_Atributo { get; set; }
 
         public String Idiomas { get; set; }
 
-        public String Pericias { get; set; }
+        public IList<string> Pericias { get; set; }
 
-        public List<string> Lv_PontosPericias { get; set; }
+        public decimal Lv_PontosPericias { get; set; }
 
-        public List<string> Lv_PontosVantagens { get; set; }
+        public decimal Lv_PontosVantagens { get; set; }
 
         public int Custo { get; set; }
 
-        public List<string> Ponto_Atributo { get; set; }
+        public decimal Lv_pontosAtributo { get; set; }
 
         public int Deslocamento { get; set; }
+
+        public int Bonus_Hp { get; set; }
+
+        public int Bonus_Mp { get; set; }
+
+        public int Bonus_CA { get; set; }
 
         public bool Monstro { get; set; }
 

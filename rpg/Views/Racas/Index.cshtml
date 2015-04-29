@@ -6,79 +6,85 @@
 <table id="tabelaGrid" cellpadding="0" cellspacing="0">
     <thead>
         <tr class="titulo">
-            <td></td>
-            <td>Descrição</td>
-            <td>Custo</td>
-            <td></td>
-            <td></td>
+            <th></th>
+            <th id="col_fil_desc">Descrição</th>
+            <th></th>
+            <th></th>
+        </tr>
+        <tr class="titulo">
+            <th></th>
+            <th><input type="text" id="txtColuna2" /></th>
+            <th></th>
+            <th></th>
         </tr>
     </thead>
     <tbody>
-        @foreach (var Raca in Model)
+        @foreach (var racas in Model)
         {
             <tr class="linha">
-                <td></td>
-                <td>@Raca.Descricao</td>
-                <td>@Raca.Custo</td>
+                <td><input class="codraca" type="hidden" value="@racas.Cod_Raca" /></td>
+                <td>@racas.Descricao</td>
                 <td>
-                    @Html.RouteLink("Editar", "Editar_Raca", new {id = Raca.Cod_Raca})
+                    @Html.RouteLink("Editar", "Editar_Raca", new { id = racas.Cod_Raca })
                 </td>
                 <td>
-                    <a href="javascript: deletar(@Raca.Cod_Raca, '@Raca.Descricao', this)">Deletar</a>
+                    <a href="javascript: deletar(@racas.Cod_Raca, '@racas.Descricao')">Deletar</a>
                 </td>
             </tr>
         }
     </tbody>
 </table>
-<div class="modal" id="modal" style="width: 500px; height: 200px;">
-    <div class="fechar">
-        <a href="javascript: fecharmodal()">Fechar</a>
-    </div>
-    <div class="titulomodal" style=" margin-left:33%;">
-        <p id="titulomodal" style=" margin-left: 20px;">Editar </p>
-    </div>
-    <form method="post">
-        <div class="modalform" style="width: 400px; height: 100%; float:left; margin-top:10px;">
-            <div class="fordescricao linha">
-                <input type="hidden" name="Atributos.Cod_Atributo" value="0" id="cod_atributo" />
-                <label for="descricao">Descrição:</label>
-                <input id="descricao" name="Atributos.Descricao" required />
-            </div>
-            <div class="linha">
-                <input type="checkbox" value="ativo" id="ativo" name="Atributos.Ativo" /><span>Ativo</span>
-            </div>
-        </div>
-        <div style="width: 80px; height: 100%;" class="divbtn">
-            <input class="btnsalvar" id="btnsalvar" type="submit" value="Salvar" onclick="salvar()" style="margin-top: 125px;" />
-        </div>
-    </form>
-</div>
 
 <div class="modaljs" id="modaljs">
     <p class="textjs">Aguarde</p>
 </div>
 <script>
-    //function clickmodal(id) {
-    //    if (id != 0) {
-    //        $('#titulomodal').html("Editar Raça");
-    //    }
-    //    $('.modal').bPopup({
-    //        modalClose: false
-    //    });
-    //}
+    $(function () {
+        $("#tabelaGrid input").keyup(function () {
+            var index = $(this).parent().index();
+            var nth = "#tabelaGrid td:nth-child(" + (index + 1).toString() + ")";
+            var valor = $(this).val().toUpperCase();
+            $("#tabelaGrid tbody tr").show();
+            $(nth).each(function () {
+                if ($(this).text().toUpperCase().indexOf(valor) < 0) {
+                    $(this).parent().hide();
+                }
+            });
+        });
+        $("#tabelaGrid input").blur(function () {
+            $(this).val("");
+        });
+    });
 
-    //function botaonovo() {
-    //    $('#titulomodal').html("Nova Raça");
-    //    clickmodal(0);
-    //}
 
-    function deletar(id, descricao, botao) {
-        if (confirm("A Raça " + descricao + " seá excluida do sistema ")) {
-            var par = $(botao).parent().parent()
-            par.remove();
+    function deletar(cod_raca, descricao) {
+        if (confirm("A Raça " + descricao + " será excluida do sistema ")) {
+            
+            $('#tabelaGrid .codraca').each(function () {
+                if ($(this).val() == cod_raca) {
+                    $(this).parent().parent().remove();
+                    return false;
+                }
+            });
+
             $('table tbody tr:odd').removeClass("zebraUm zebraDois").addClass('zebraUm');
             $('table tbody tr:even').removeClass("zebraUm zebraDois").addClass('zebraDois');
+
+            var url = "@Url.Action("delete", "Racas")";
+            $.ajax({
+                url: url,
+                type: "POST",
+                data: { cod_classe: cod_classe },
+                beforeSend: beforeSendFunction,
+                success: successFunction,
+                error: errorFunction,
+                complete: completeFunction
+            });
         }
+    }
+
+    function botaonovo() {
+        window.location.href = 'Raca/0';
     }
 
 </script>   

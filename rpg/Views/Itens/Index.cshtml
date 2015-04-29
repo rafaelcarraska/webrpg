@@ -28,7 +28,7 @@
         @foreach (var Item in Model)
         {
             <tr class="linha">
-                <td></td>
+                <td><input class="coditem" type="hidden" value="@Item.Cod_Item" /></td>
                 <td title="@Item.Descricao_Detalhada">@Item.Descricao</td>
                 <td>@Item.Valor_Min.ToString().Replace(".",",") P.O</td>
                 <td>@Item.Valor_Max.ToString().Replace(".", ",") P.O</td>
@@ -37,7 +37,7 @@
                     @Html.RouteLink("Editar", "Editar_Item", new { id = Item.Cod_Item })
                 </td>
                 <td>
-                    <a href="javascript: deletar(@Item.Cod_Item, '@Item.Descricao', this)">Deletar</a>
+                    <a href="javascript: deletar(@Item.Cod_Item, '@Item.Descricao')">Deletar</a>
                 </td>
             </tr>
         }
@@ -66,14 +66,20 @@
     });
 
 
-    function deletar(cod_item, descricao, botao) {
-        if (confirm("A Vantagem " + descricao + " será excluida do sistema ")) {
-            var par = $(botao).parent().parent()
-            par.remove();
+    function deletar(cod_item, descricao) {
+        if (confirm("o Item " + descricao + " será excluida do sistema ")) {
+            
+            $('#tabelaGrid .coditem').each(function () {
+                if ($(this).val() == cod_item) {
+                    $(this).parent().parent().remove();
+                    return false;
+                }
+            });
+
             $('table tbody tr:odd').removeClass("zebraUm zebraDois").addClass('zebraUm');
             $('table tbody tr:even').removeClass("zebraUm zebraDois").addClass('zebraDois');
 
-            var url = "@Url.Action("delete", "Vantagens")";
+            var url = "@Url.Action("delete", "Itens")";
             $.ajax({
                 url: url,
                 type: "POST",

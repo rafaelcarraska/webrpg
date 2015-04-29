@@ -16,13 +16,13 @@
         @foreach (var Campanha in Model)
         {
             <tr class="linha">
-                <td></td>
+                <td><input class="codcampanha" type="hidden" value="@Campanha.Cod_Campanha" /></td>
                 <td>@Campanha.Descricao</td>
                 <td>
                     <a href="javascript: clickmodal(@Campanha.Cod_Ficha)">Editar</a>
                 </td>
                 <td>
-                    <a href="javascript: deletar(@Campanha.Cod_Ficha, '@Campanha.Descricao', this)">Deletar</a>
+                    <a href="javascript: deletar(@Campanha.Cod_Ficha, '@Campanha.Descricao')">Deletar</a>
                 </td>
             </tr>
         }
@@ -47,7 +47,7 @@
             </div>
         </div>
         <div style="width: 80px; height: 100%;" class="divbtn">
-            <input class="btnsalvar" id="btnsalvar" type="submit" value="Salvar" onclick="salvar()" style="margin-top: 125px;" />
+            <input class="btnsalvar" id="btnsalvar" type="button" value="Salvar" onclick="salvar()" style="margin-top: 125px;" />
         </div>
     </form>
 </div>
@@ -70,10 +70,16 @@
         clickmodal(0);
     }
 
-    function deletar(id, descricao, botao) {
+    function deletar(id, descricao) {
         if (confirm("A Campanha " + descricao + " seá excluida do sistema ")) {
-            var par = $(botao).parent().parent()
-            par.remove();
+            
+            $('#tabelaGrid .codcampanha').each(function () {
+                if ($(this).val() == id) {
+                    $(this).parent().parent().remove();
+                    return false;
+                }
+            });
+
             $('table tbody tr:odd').removeClass("zebraUm zebraDois").addClass('zebraUm');
             $('table tbody tr:even').removeClass("zebraUm zebraDois").addClass('zebraDois');
         }

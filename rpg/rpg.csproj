@@ -170,8 +170,10 @@
     <Compile Include="Controllers\MenuController.cs" />
     <Compile Include="Controllers\PericiasController.cs" />
     <Compile Include="Controllers\RacasController.cs" />
+    <Compile Include="Controllers\ShopController.cs" />
     <Compile Include="Controllers\UsuariosController.cs" />
     <Compile Include="Controllers\VantagensController.cs" />
+    <Compile Include="Dao\ShopDao.cs" />
     <Compile Include="Dao\PerfilDao.cs" />
     <Compile Include="Dao\ItemDao.cs" />
     <Compile Include="Dao\Magia_TecnicaDao.cs" />
@@ -191,6 +193,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Shop.cs" />
     <Compile Include="Models\Perfil.cs" />
     <Compile Include="Models\Magia_Tecnica.cs" />
     <Compile Include="Models\Vantagem.cs" />
@@ -393,6 +396,7 @@
     <Content Include="Views\Pericias\Form.cshtml" />
     <Content Include="Views\Itens\Form.cshtml" />
     <Content Include="Views\Home\Ficha.cshtml" />
+    <Content Include="Views\Shop\Index.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

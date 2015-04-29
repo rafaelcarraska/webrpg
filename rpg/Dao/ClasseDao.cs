@@ -111,7 +111,7 @@ namespace rpg.Dao
                     + ", Pericias = '" + string.Join<string>(";", classe.Pericias).Replace("'", "''") + "', Vantagens_Desvantagens = '" + string.Join<int>("_", classe.Vantagens_Desvantagens).Replace("'", "''")
                     + "', Descricao_Detalhada = '" + classe.Descricao_Detalhada.Replace("'", "''") + "', Campanha = " + classe.Campanha + ", Ativo = '" + classe.Ativo.ToString() + "' where Cod_Classe = " + classe.Cod_Classe + " ";
                 _conn.execute(strupdate);
-                _LogDao.insert("Vantagem", "up", "cod_vantagem = " + classe.Cod_Classe.ToString());
+                _LogDao.insert("Vantagem", "up", "cod_classe = " + classe.Cod_Classe.ToString());
             }
             catch (Exception)
             {

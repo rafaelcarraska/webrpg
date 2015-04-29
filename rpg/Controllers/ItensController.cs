@@ -11,7 +11,7 @@ namespace rpg.Controllers
 {
     public class ItensController : BaseController
     {
-        // GET: Item
+        [Route("Itens", Name = "Itens")] 
         public ActionResult Index()
         {
             if (!verifica_acesso("Itens", "Visualizar"))
@@ -54,6 +54,10 @@ namespace rpg.Controllers
             _row = new List<string>();
             _row.Add("D");
             _row.Add("Defesa");
+            _tipo.Add(_row);
+            _row = new List<string>();
+            _row.Add("M");
+            _row.Add("Magico");
             _tipo.Add(_row);
             ViewBag.Tipo = _tipo;
 

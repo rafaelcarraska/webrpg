@@ -110,16 +110,16 @@
                         <option value="0">Global</option>
                         @foreach (var Campanhas in ViewBag.Campanhas)
                         {
-                            <option value="@Campanhas.Cod_Campanha">@Campanhas.Descricao</option>
+                            <option value="@Campanhas.Cod_Campanha" selected="@Campanhas.Cod_Campanha.Equals(Model.Campanha)">@Campanhas.Descricao</option>
                         }
                     </select>
                 </div>
                 <div class="linha">
-                    <input type="checkbox" checked="@Convert.ToBoolean(Model.Ativo) Model.Ativo" id="ativo" name="Vantagem.Ativo" /><span>Ativo</span>
+                    <input type="checkbox" checked="@Convert.ToBoolean(Model.Ativo)" id="ativo" name="Vantagem.Ativo" /><span>Ativo</span>
                 </div>
 
                 <div style="width: 80px; height: 100%;" class="divbtn">
-                    <input class="btnsalvar" id="btnsalvar" type="submit" value="Salvar" onclick="salvar()" style="margin-bottom: 25px;" />
+                    <input class="btnsalvar" id="btnsalvar" type="button" value="Salvar" onclick="salvar()" style="margin-bottom: 25px;" />
                 </div>
             </form>
         </div>

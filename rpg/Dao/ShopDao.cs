@@ -11,91 +11,31 @@ using System.Web.Security;
 
 namespace rpg.Dao
 {
-    public class ItemDao
+    public class ShopDao
     {
         Conexao _conn;
         LogDao _LogDao;
-        public List<Item> Listar_Itens_dt()
+        public List<Shop> Listar_Shop_dt()
         {
             _conn = new Conexao();
-            List<Item> list_Itens = new List<Item>();
+            List<Shop> list_shop = new List<Shop>();
 
-            DataTable dt_Item = _conn.dataTable("select Cod_Item, Descricao, Valor_Min, Valor_Max, Descricao_Detalhada, tipo, Ativo from Itens order by descricao", "ITEM");
-            foreach (DataRow row in dt_Item.Rows)
+            DataTable dt_shop = _conn.dataTable("select Cod_Shop, Descricao, Valor_Min, Valor_Max, Magico, Raridade, N_Max from Shop order by descricao", "SHOP");
+            foreach (DataRow row in dt_shop.Rows)
             {
-                string tipo = row["Tipo"].ToString();
-                switch (tipo)
+                list_shop.Add(new Shop
                 {
-                    case "D":
-                        tipo = "Defesa";
-                        break;
-                    case "A":
-                        tipo = "Ataque";
-                        break;
-                    case "C":
-                        tipo = "Comum";
-                        break;
-                    case "M":
-                        tipo = "Magico";
-                        break;
-                    default:
-                        break;
-                }
-                list_Itens.Add(new Item
-                {
-                    Cod_Item = Convert.ToInt32(row["Cod_Item"].ToString()),
+                    Cod_Shop = Convert.ToInt32(row["Cod_Shop"].ToString()),
                     Descricao = row["Descricao"].ToString(),
                     Valor_Min = Convert.ToDecimal(row["Valor_Min"].ToString()),
                     Valor_Max = Convert.ToDecimal(row["Valor_Max"].ToString()),
-                    Descricao_Detalhada = row["Descricao_Detalhada"].ToString(),
-                    Tipo = tipo,
-                    Ativo = Convert.ToBoolean(row["Ativo"].ToString())
+                    Magico = Convert.ToBoolean(row["Magico"].ToString()),
+                    Raridade = Convert.ToInt32(row["Raridade"].ToString()),
+                    N_Max = Convert.ToInt32(row["N_Max"].ToString())
                 });
             }
 
-            return list_Itens;
-        }
-
-        public Item Listar_Item(int cod_Item)
-        {
-            _conn = new Conexao();
-            Item _Item = new Item();
-
-            DataTable dt_item = _conn.dataTable("select * from Itens where cod_Item = " + cod_Item + "", "ITEM");
-            if (dt_item.Rows.Count > 0)
-            {
-                _Item.Cod_Item = Convert.ToInt32(dt_item.Rows[0]["Cod_Item"].ToString());
-                _Item.Descricao = dt_item.Rows[0]["Descricao"].ToString();
-                _Item.Valor_Min = Convert.ToDecimal(dt_item.Rows[0]["Valor_Min"].ToString());
-                _Item.Valor_Max = Convert.ToDecimal(dt_item.Rows[0]["Valor_Max"].ToString());
-                _Item.Up = Convert.ToBoolean(dt_item.Rows[0]["Up"].ToString());
-                _Item.Bonus_Atk_Corpo = Convert.ToInt32(dt_item.Rows[0]["Bonus_Atk_Corpo"].ToString());
-                _Item.Bonus_Atk_Distanc = Convert.ToInt32(dt_item.Rows[0]["Bonus_Atk_Distanc"].ToString());
-                _Item.Decisivo = Convert.ToInt32(dt_item.Rows[0]["Decisivo"].ToString());
-                _Item.Critico = Convert.ToInt32(dt_item.Rows[0]["Critico"].ToString());
-                _Item.Dano = dt_item.Rows[0]["Dano"].ToString();
-                _Item.Resistencia = Convert.ToInt32(dt_item.Rows[0]["Resistencia"].ToString());
-                _Item.Peso = Convert.ToDecimal(dt_item.Rows[0]["Peso"].ToString());
-                _Item.Ca = Convert.ToInt32(dt_item.Rows[0]["Ca"].ToString());
-                _Item.Raridade = Convert.ToInt32(dt_item.Rows[0]["Raridade"].ToString());
-                _Item.Tipo = dt_item.Rows[0]["Tipo"].ToString();
-                if (string.IsNullOrEmpty(dt_item.Rows[0]["Pre_Requisito"].ToString()))
-                {
-                    _Item.Pre_Requisito = new List<int>();
-                }
-                else
-                {
-                    _Item.Pre_Requisito = new List<int>(Array.ConvertAll(dt_item.Rows[0]["Pre_Requisito"].ToString().Split('_'), int.Parse));
-                }
-                _Item.Penalidade = dt_item.Rows[0]["Penalidade"].ToString();
-                _Item.Duas_Maos = Convert.ToBoolean(dt_item.Rows[0]["Duas_Maos"].ToString());
-                _Item.Municao = Convert.ToBoolean(dt_item.Rows[0]["Municao"].ToString());
-                _Item.Descricao_Detalhada = dt_item.Rows[0]["Descricao_Detalhada"].ToString();
-                _Item.Campanha = Convert.ToInt32(dt_item.Rows[0]["Campanha"].ToString());
-                _Item.Ativo = Convert.ToBoolean(dt_item.Rows[0]["Ativo"].ToString());
-            }
-
-            return _Item;
+            return list_shop;
         }
 
         public string Insert(Item item)

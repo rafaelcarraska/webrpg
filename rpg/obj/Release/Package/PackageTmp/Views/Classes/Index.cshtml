@@ -22,13 +22,13 @@
         @foreach (var Classes in Model)
         {
             <tr class="linha">
-                <td></td>
+                <td><input class="codclasse" type="hidden" value="@Classes.Cod_Classe" /></td>
                 <td>@Classes.Descricao</td>
                 <td>
                     @Html.RouteLink("Editar", "Editar_Classe", new { id = Classes.Cod_Classe })
                 </td>
                 <td>
-                    <a href="javascript: deletar(@Classes.Cod_Classe, '@Classes.Descricao', this)">Deletar</a>
+                    <a href="javascript: deletar(@Classes.Cod_Classe, '@Classes.Descricao')">Deletar</a>
                 </td>
             </tr>
         }
@@ -57,10 +57,16 @@
     });
 
 
-    function deletar(cod_classe, descricao, botao) {
+    function deletar(cod_classe, descricao) {
         if (confirm("A Classe " + descricao + " será excluida do sistema ")) {
-            var par = $(botao).parent().parent()
-            par.remove();
+            
+            $('#tabelaGrid .codclasse').each(function () {
+                if ($(this).val() == cod_classe) {
+                    $(this).parent().parent().remove();
+                    return false;
+                }
+            });
+
             $('table tbody tr:odd').removeClass("zebraUm zebraDois").addClass('zebraUm');
             $('table tbody tr:even').removeClass("zebraUm zebraDois").addClass('zebraDois');
 

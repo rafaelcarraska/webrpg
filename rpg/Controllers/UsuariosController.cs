@@ -10,7 +10,6 @@ namespace rpg.Controllers
 {
     public class UsuariosController : BaseController
     {
-        // GET: Usuario
         public ActionResult Index()
         {
             if (!verifica_acesso("Usuários", "Visualizar"))

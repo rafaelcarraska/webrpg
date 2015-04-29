@@ -22,13 +22,13 @@
         @foreach (var Atributos in Model)
         {
             <tr class="linha">
-                <td></td>
+                <td><input class="codatributo" type="hidden" value="@Atributos.Cod_Atributo" /></td>
                 <td>@Atributos.Descricao</td>
                 <td>
                     <a href="javascript: clickmodal(@Atributos.Cod_Atributo, '@Atributos.Descricao', '@Atributos.Ativo')">Editar</a>
                 </td>
                 <td>
-                    <a href="javascript: deletar(@Atributos.Cod_Atributo, '@Atributos.Descricao', this)">Deletar</a>
+                    <a href="javascript: deletar(@Atributos.Cod_Atributo, '@Atributos.Descricao')">Deletar</a>
                 </td>
             </tr>
         }
@@ -53,7 +53,7 @@
             </div>            
         </div>
         <div style="width: 80px; height: 100%;" class="divbtn">
-            <input class="btnsalvar" id="btnsalvar" type="submit" value="Salvar" onclick="salvar()" style="margin-top: 125px;" />
+            <input class="btnsalvar" id="btnsalvar" type="button" value="Salvar" onclick="salvar()" style="margin-top: 125px;" />
         </div>
     </form>
 </div>
@@ -112,10 +112,16 @@
         });
     }
 
-    function deletar(cod_atributo, descricao, botao) {
+    function deletar(cod_atributo, descricao) {
        if (confirm("O Atributo " + descricao +" será excluido do sistema ")) {
-           var par = $(botao).parent().parent()
-           par.remove();
+           
+           $('#tabelaGrid .codatributo').each(function () {
+               if ($(this).val() == cod_atributo) {
+                   $(this).parent().parent().remove();
+                   return false;
+               }
+           });
+
            $('table tbody tr:odd').removeClass("zebraUm zebraDois").addClass('zebraUm');
            $('table tbody tr:even').removeClass("zebraUm zebraDois").addClass('zebraDois');
 

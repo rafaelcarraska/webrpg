@@ -61,13 +61,8 @@ function successFunction(msg) {
     }
 }
 
-function errorFunction(msg) {
-    if (msg != "") {
-        alert(msg);
-    }
-    else {
+function errorFunction() {    
         alert("Erro, Atualize a pagina e tente novamente!");
-    }
 }
 
 function completeFunction() {
