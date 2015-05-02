@@ -226,6 +226,7 @@
     <Content Include="Content\Personagem.css" />
     <Content Include="Content\Modal.css" />
     <Content Include="Content\style.css" />
+    <Content Include="Content\stylesheet.css" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Imagens\icones\cancel.gif" />
@@ -250,6 +251,8 @@
     <Content Include="Imagens\img\apple-touch-icon-144-precomposed.png" />
     <Content Include="Imagens\img\apple-touch-icon-57-precomposed.png" />
     <Content Include="Imagens\img\apple-touch-icon-72-precomposed.png" />
+    <Content Include="Imagens\img\arrow-down.png" />
+    <Content Include="Imagens\img\arrow-up.png" />
     <Content Include="Imagens\img\favicon.png" />
     <Content Include="Imagens\img\glyphicons-halflings-white.png" />
     <Content Include="Imagens\img\glyphicons-halflings.png" />
@@ -270,6 +273,7 @@
     <Content Include="Scripts\less-1.3.3.min.js" />
     <Content Include="Scripts\modernizr-1.7.min.js" />
     <Content Include="Scripts\scripts.js" />
+    <Content Include="Scripts\spinBox.js" />
     <Content Include="Scripts\Uteis.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
