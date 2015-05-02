@@ -190,13 +190,13 @@ namespace rpg.Controllers
 
         public string validar(Item Item)
         {
-            VantagemDao _VantagemDao = new VantagemDao();
+            ItemDao _ItemDao = new ItemDao();
             string msg = "";
             if (string.IsNullOrEmpty(Item.Descricao))
             {
                 msg = "O Campo descrição é obrigatório.";
             }
-            if (_VantagemDao.verificar_descricao(Item.Descricao, Item.Cod_Item))
+            if (_ItemDao.verificar_descricao(Item.Descricao, Item.Cod_Item))
             {
                 msg = "O Item "+ Item.Descricao +" já existe.";
             }

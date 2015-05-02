@@ -21,13 +21,13 @@
         <div id="conteudo">
             <form method="post">
                 <div class="fordescricao linha">
-                    <input type="hidden" name="Vantagem.Cod_Classe" value="@Model.Cod_Classe" id="Cod_Vantagem" />
+                    <input type="hidden" name="Classe.Cod_Classe" value="@Model.Cod_Classe" id="Cod_Classe" />
                     <label for="descricao">Descrição:</label>
-                    <input id="descricao" name="Vantagem.Descricao" value="@Model.Descricao" required style="width:250px;" />
+                    <input id="descricao" name="Classe.Descricao" value="@Model.Descricao" required style="width:250px;" />
                 </div>
                 <div class="linha">
                     <label for="Custo">Custo:</label>
-                    <input id="Custo" class="numero" name="Vantagem.Custo" value="@Model.Custo" required />
+                    <input id="Custo" class="numero" name="Classe.Custo" value="@Model.Custo" required />
                 </div>
                 <div class="linha">
                     <label for="Pericia">Pericia Bonus</label>
@@ -102,7 +102,7 @@
                               
                 <div class="linha">
                     <label for="Caracteristicas">Caracteristicas Detalhada:</label>
-                    <textarea cols="106" rows="6" id="Caracteristicas" name="Vantagem.Caracteristicas" style="display:inline-block; vertical-align:middle;">@Model.Descricao_Detalhada</textarea>
+                    <textarea cols="106" rows="6" id="Caracteristicas" name="Classe.Caracteristicas" style="display:inline-block; vertical-align:middle;">@Model.Descricao_Detalhada</textarea>
                 </div>
                 <div class="linha">
                     <label for="Campanha">Campanha</label>
@@ -115,7 +115,7 @@
                     </select>
                 </div>
                 <div class="linha">
-                    <input type="checkbox" checked="@Convert.ToBoolean(Model.Ativo)" id="ativo" name="Vantagem.Ativo" /><span>Ativo</span>
+                    <input type="checkbox" checked="@Convert.ToBoolean(Model.Ativo)" id="ativo" name="Classe.Ativo" /><span>Ativo</span>
                 </div>
 
                 <div style="width: 80px; height: 100%;" class="divbtn">
@@ -188,7 +188,7 @@
     }
 
     function salvar() {
-        var Cod_Classe = $('#Cod_Vantagem').val();
+        var Cod_Classe = $('#Cod_Classe').val();
         var Descricao = $('#descricao').val();
         var Custo = $('#Custo').val();
 

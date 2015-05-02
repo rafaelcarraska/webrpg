@@ -253,6 +253,7 @@
     <Content Include="Imagens\img\favicon.png" />
     <Content Include="Imagens\img\glyphicons-halflings-white.png" />
     <Content Include="Imagens\img\glyphicons-halflings.png" />
+    <Content Include="Imagens\Itens\item_1.png" />
     <Content Include="Imagens\linha.gif" />
     <Content Include="Imagens\logotipo.jpg" />
     <Content Include="Imagens\Personagens\pers_1.jpg" />

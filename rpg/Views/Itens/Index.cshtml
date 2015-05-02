@@ -29,7 +29,7 @@
         {
             <tr class="linha">
                 <td><input class="coditem" type="hidden" value="@Item.Cod_Item" /></td>
-                <td title="@Item.Descricao_Detalhada">@Item.Descricao</td>
+                <td title="@Item.Descricao_Detalhada" onclick="clickmodal('@Json.Encode(Item)')">@Item.Descricao</td>
                 <td>@Item.Valor_Min.ToString().Replace(".",",") P.O</td>
                 <td>@Item.Valor_Max.ToString().Replace(".", ",") P.O</td>
                 <td>@Item.Tipo.ToString()</td>
@@ -43,6 +43,36 @@
         }
     </tbody>
 </table>
+
+<div class="modal" id="modal" style="width: 700px; height: 400px;">
+    <div class="titulomodal" style=" margin-left:33%;">
+        <p id="titulomodal" style=" margin-left: 20px;">Detalhes do Item</p>
+    </div>
+    <form method="post">
+        <div class="modalform" style="width: 400px; height: 100%; float:left; margin-top:10px;">
+            <div class=" linha">
+                <label>Descrição:</label>
+                <label id="descricao"></label>
+            </div>
+            <div class="linha">
+                <label>Valor Min:</label>
+                <label id="vlrmin"></label>
+            </div>
+            <div class="linha">
+                <label>Valor Max:</label>
+                <label id="vlrmax"></label>
+            </div>
+            <div class="linha">
+                <input type="checkbox" value="ativo" id="ativo" /><span>Ativo</span>
+            </div>
+            
+        </div>
+        <div class="imgmodal">
+            <img src="~/Imagens/Itens/item_1.png" />
+        </div>
+
+    </form>
+</div>
 
 <div class="modaljs" id="modaljs">
     <p class="textjs">Aguarde</p>
@@ -65,6 +95,14 @@
         });
     });
 
+    function clickmodal(Item) {
+        var _Item = JSON.parse(Item);
+        $("#descricao").html(_Item.Descricao);
+        $("#vlrmin").html(_Item.Valor_Min);
+        $("#vlrmax").html(_Item.Valor_Max);
+        $('.modal').bPopup({
+        });
+    }
 
     function deletar(cod_item, descricao) {
         if (confirm("o Item " + descricao + " será excluida do sistema ")) {

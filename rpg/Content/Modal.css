@@ -70,3 +70,14 @@ li {
     font-family: Arial;
     font-size: 14px;
 }
+.imgmodal 
+{
+    margin-right: 30px;
+    height: 160px;
+    width: 170px;
+    float: right;
+    background: #fff;
+    box-shadow: 0 0 15px #999;
+    display: flex;
+    overflow: hidden;
+}

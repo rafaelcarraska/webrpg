@@ -98,6 +98,29 @@ namespace rpg.Dao
             return _Item;
         }
 
+        public bool verificar_descricao(string descricao, int cod_item)
+        {
+            try
+            {
+                _conn = new Conexao();
+
+                string strselect = "select count(cod_item) from itens where descricao = '" + descricao.Replace("'", "''") + "' and cod_item <> " + cod_item + "";
+                if (Convert.ToInt32(_conn.scalar(strselect)) > 0)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+
+            }
+            catch (Exception)
+            {
+                return true;
+            }
+        }
+
         public string Insert(Item item)
         {
             string msg = "";
