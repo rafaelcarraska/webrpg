@@ -45,6 +45,7 @@ namespace rpg.Controllers
         public ActionResult Ficha(int id)
         {
             ViewBag.idjpg = id + ".jpg";
+            ViewBag.hp = 20;
             return View();
         }
 
