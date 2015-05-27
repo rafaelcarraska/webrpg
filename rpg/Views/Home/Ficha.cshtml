@@ -52,7 +52,7 @@
                             </div>
                             <div class="col-md-6 column">
                                 <div class="btn-group">
-                                    <button class="btn btn-default">Action</button> <button data-toggle="dropdown" class="btn btn-default dropdown-toggle"><span class="caret"></span></button>
+                                    @ViewBag.nomePersonagem
                                     <ul class="dropdown-menu">
                                         <li>
                                             <a href="#">Action</a>
@@ -75,7 +75,7 @@
                             </div>
                             <div class="col-md-6 column">
                                 <div class="btn-group">
-                                    <button class="btn btn-default">Action</button> <button data-toggle="dropdown" class="btn btn-default dropdown-toggle"><span class="caret"></span></button>
+                                    @ViewBag.nomePersonagem
                                     <ul class="dropdown-menu">
                                         <li>
                                             <a href="#">Action</a>
@@ -98,7 +98,7 @@
                             </div>
                             <div class="col-md-6 column">
                                 <div class="btn-group">
-                                    <button class="btn btn-default">Action</button> <button data-toggle="dropdown" class="btn btn-default dropdown-toggle"><span class="caret"></span></button>
+                                    @ViewBag.proximo
                                     <ul class="dropdown-menu">
                                         <li>
                                             <a href="#">Action</a>
@@ -123,7 +123,7 @@
                             </div>
                             <div class="col-md-6 column">
                                 <div class="btn-group">
-                                    <button class="btn btn-default">Action</button> <button data-toggle="dropdown" class="btn btn-default dropdown-toggle"><span class="caret"></span></button>
+                                    @ViewBag.raca
                                     <ul class="dropdown-menu">
                                         <li>
                                             <a href="#">Action</a>
@@ -146,7 +146,7 @@
                             </div>
                             <div class="col-md-6 column">
                                 <div class="btn-group">
-                                    <button class="btn btn-default">Action</button> <button data-toggle="dropdown" class="btn btn-default dropdown-toggle"><span class="caret"></span></button>
+                                    @ViewBag.lvl
                                     <ul class="dropdown-menu">
                                         <li>
                                             <a href="#">Action</a>
@@ -171,7 +171,7 @@
                             </div>
                             <div class="col-md-6 column">
                                 <div class="btn-group">
-                                    <button class="btn btn-default">Action</button> <button data-toggle="dropdown" class="btn btn-default dropdown-toggle"><span class="caret"></span></button>
+                                    @ViewBag.classe
                                     <ul class="dropdown-menu">
                                         <li>
                                             <a href="#">Action</a>
@@ -194,7 +194,7 @@
                             </div>
                             <div class="col-md-6 column">
                                 <div class="btn-group">
-                                    <button class="btn btn-default">Action</button> <button data-toggle="dropdown" class="btn btn-default dropdown-toggle"><span class="caret"></span></button>
+                                    @ViewBag.pontosHeroicos
                                     <ul class="dropdown-menu">
                                         <li>
                                             <a href="#">Action</a>
@@ -242,31 +242,31 @@
                                 <tr>
 
                                     <td id="attr1Text">Força</td>
-                                    <td><div id="attr1"></div></td>
+                                    <td><div id="attr1">@ViewBag.attr1</div></td>
                                     <td>+0</td>
                                 </tr>
                                 <tr>
 
                                     <td id="attr2Text">Habilidade</td>
-                                    <td><div id="attr2"></div></td>
+                                    <td><div id="attr2">@ViewBag.attr2</div></td>
                                     <td>+0</td>
                                 </tr>
                                 <tr>
 
                                     <td id="attr3Text">Q.I</td>
-                                    <td><div id="attr3"></div></td>
+                                    <td><div id="attr3">@ViewBag.attr3</div></td>
                                     <td>+0</td>
                                 </tr>
                                 <tr class="">
 
                                     <td id="attr4Text">Mira</td>
-                                    <td><div id="attr4"></div></td>
+                                    <td><div id="attr4">@ViewBag.attr4</div></td>
                                     <td>+0</td>
                                 </tr>
                                 <tr class="">
 
                                     <td id="attr5Text">Resitencia</td>
-                                    <td><div id="attr5"></div></td>
+                                    <td><div id="attr5"></div>@ViewBag.attr5</td>
                                     <td>+0</td>
                                 </tr>
                             </tbody>
@@ -290,14 +290,14 @@
                                 <tr>
 
                                     <td>HP</td>
-                                    <td>200</td>
-                                    <td>150</td>
+                                    <td>@ViewBag.hp</td>
+                                    <td>@ViewBag.hpAtual</td>
                                 </tr>
                                 <tr class="">
 
                                     <td>MP</td>
-                                    <td>200</td>
-                                    <td>40</td>
+                                    <td>@ViewBag.mp</td>
+                                    <td>@ViewBag.mpAtual</td>
                                 </tr>
                                 <tr class="success"></tr>
                                 <tr class="warning"></tr>
@@ -312,19 +312,21 @@
                             <thead>
                                 <tr>
                                     <th>C.A</th>
-                                    <th></th>
-                                    <th></th>
+                                    <th>@ViewBag.caRaca</th>
+                                    <th>@ViewBag.caArmadura</th>
 
-                                    <th></th>
-                                    <th></th>
+                                    <th>@ViewBag.caEscudo</th>
+                                    <th>@ViewBag.caItem</th>
+                                    <th>@ViewBag.caTotal</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
                                     <td></td>
-                                    <td>+5</td>
+                                    <td>+Raça</td>
                                     <td>+Armadura</td>
                                     <td>+Escudo</td>
+                                    <td>+Item</td>
                                     <td>Total</td>
                                 </tr>
 
@@ -355,37 +357,20 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
+                                @foreach (String listVant in ViewBag.vantagem)
+                                {
+                                    int i = 1;
+                                    String vant = "vantagem" + i.ToString();
+                                    string desv = "desvantagem" + i.ToString();
+                                    i++;
+                                    <tr>
+                                        <td id="@vant">@listVant</td>
+                                        <td id="@desv"></td>
+                                    </tr>
+                                }
 
-                                    <td>vantagem lala</td>
-                                    <td>desvantagem qualquer</td>
 
-                                </tr>
-                                <tr class="">
-
-                                    <td>vantagem lala</td>
-                                    <td>desvantagem qualquer</td>
-
-                                </tr>
-                                <tr class="">
-
-                                    <td>vantagem lala</td>
-                                    <td></td>
-
-                                </tr>
-                                <tr class="">
-
-                                    <td>vantagem lala</td>
-                                    <td></td>
-
-                                </tr>
-                                <tr class="">
-
-                                    <td>vantagem lala</td>
-                                    <td></td>
-
-                                </tr>
-                            </tbody>
+</tbody>
                         </table>
                     </div>
                 </div>
